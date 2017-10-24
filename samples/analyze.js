@@ -18,10 +18,10 @@
 function analyzeFaces(gcsUri) {
   // [START analyze_faces]
   // Imports the Google Cloud Video Intelligence library
-  const Video = require('@google-cloud/video-intelligence');
+  const video = require('@google-cloud/video-intelligence');
 
   // Instantiates a client
-  const video = Video();
+  const client = new video.VideoIntelligenceServiceClient();
 
   // The GCS filepath of the video to analyze
   // const gcsUri = 'gs://my-bucket/my-video.mp4';
@@ -32,7 +32,7 @@ function analyzeFaces(gcsUri) {
   };
 
   // Detects faces in a video
-  video
+  client
     .annotateVideo(request)
     .then(results => {
       const operation = results[0];
@@ -81,12 +81,10 @@ function analyzeFaces(gcsUri) {
 function analyzeLabelsGCS(gcsUri) {
   // [START analyze_labels_gcs]
   // Imports the Google Cloud Video Intelligence library
-  const Video = require('@google-cloud/video-intelligence');
+  const video = require('@google-cloud/video-intelligence');
 
   // Instantiates a client
-  const video = Video({
-    servicePath: `videointelligence.googleapis.com`,
-  });
+  const client = new video.VideoIntelligenceServiceClient();
 
   // The GCS filepath of the video to analyze
   // const gcsUri = 'gs://my-bucket/my-video.mp4';
@@ -97,7 +95,7 @@ function analyzeLabelsGCS(gcsUri) {
   };
 
   // Detects labels in a video
-  video
+  client
     .annotateVideo(request)
     .then(results => {
       const operation = results[0];
@@ -146,11 +144,11 @@ function analyzeLabelsGCS(gcsUri) {
 function analyzeLabelsLocal(path) {
   // [START analyze_labels_local]
   // Imports the Google Cloud Video Intelligence library + Node's fs library
-  const Video = require('@google-cloud/video-intelligence');
+  const video = require('@google-cloud/video-intelligence');
   const fs = require('fs');
 
   // Instantiates a client
-  const video = Video();
+  const client = new video.VideoIntelligenceServiceClient();
 
   // The local filepath of the video to analyze
   // const path = 'my-file.mp4';
@@ -166,7 +164,7 @@ function analyzeLabelsLocal(path) {
   };
 
   // Detects labels in a video
-  video
+  client
     .annotateVideo(request)
     .then(results => {
       const operation = results[0];
@@ -215,10 +213,10 @@ function analyzeLabelsLocal(path) {
 function analyzeShots(gcsUri) {
   // [START analyze_shots]
   // Imports the Google Cloud Video Intelligence library
-  const Video = require('@google-cloud/video-intelligence');
+  const video = require('@google-cloud/video-intelligence');
 
   // Instantiates a client
-  const video = Video();
+  const client = new video.VideoIntelligenceServiceClient();
 
   // The GCS filepath of the video to analyze
   // const gcsUri = 'gs://my-bucket/my-video.mp4';
@@ -229,7 +227,7 @@ function analyzeShots(gcsUri) {
   };
 
   // Detects camera shot changes
-  video
+  client
     .annotateVideo(request)
     .then(results => {
       const operation = results[0];
@@ -284,10 +282,10 @@ function analyzeShots(gcsUri) {
 function analyzeSafeSearch(gcsUri) {
   // [START analyze_safe_search]
   // Imports the Google Cloud Video Intelligence library
-  const Video = require('@google-cloud/video-intelligence');
+  const video = require('@google-cloud/video-intelligence');
 
   // Instantiates a client
-  const video = Video();
+  const client = new video.VideoIntelligenceServiceClient();
 
   // The GCS filepath of the video to analyze
   // const gcsUri = 'gs://my-bucket/my-video.mp4';
@@ -308,7 +306,7 @@ function analyzeSafeSearch(gcsUri) {
   ];
 
   // Detects unsafe content
-  video
+  client
     .annotateVideo(request)
     .then(results => {
       const operation = results[0];
