@@ -98,10 +98,15 @@ class VideoIntelligenceServiceClient {
     );
     var protoFilesRoot = new gax.grpc.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
-      path.join(__dirname, '..', '..', 'protos', 'google/cloud/videointelligence/v1beta1/video_intelligence.proto'),
+      path.join(
+        __dirname,
+        '..',
+        '..',
+        'protos',
+        'google/cloud/videointelligence/v1beta1/video_intelligence.proto'
+      ),
       protoFilesRoot
     );
-
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -148,9 +153,7 @@ class VideoIntelligenceServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var videoIntelligenceServiceStubMethods = [
-      'annotateVideo',
-    ];
+    var videoIntelligenceServiceStubMethods = ['annotateVideo'];
     for (let methodName of videoIntelligenceServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         videoIntelligenceServiceStub.then(
@@ -185,9 +188,7 @@ class VideoIntelligenceServiceClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -337,6 +338,5 @@ class VideoIntelligenceServiceClient {
     return this._innerApiCalls.annotateVideo(request, options, callback);
   }
 }
-
 
 module.exports = VideoIntelligenceServiceClient;
