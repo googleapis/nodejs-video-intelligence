@@ -46,7 +46,7 @@
     "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "test-no-cover": "repo-tools test run --cmd mocha -- test/*.js --no-timeouts",
-    "test": "repo-tools test run --cmd npm -- run cover",
+    "test": "repo-tools test run --cmd npm -- run cover"
   },
   "dependencies": {
     "extend": "^3.0",
