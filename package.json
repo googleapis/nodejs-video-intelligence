@@ -1,9 +1,13 @@
 {
-  "repository": "googleapis/nodejs-video-intelligence",
   "name": "@google-cloud/video-intelligence",
-  "version": "0.3.2",
-  "author": "Google Inc",
   "description": "Google Cloud Video Intelligence API client for Node.js",
+  "version": "0.3.2",
+  "license": "Apache-2.0",
+  "author": "Google Inc",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "repository": "googleapis/nodejs-video-intelligence",
   "main": "src/index.js",
   "files": [
     "protos",
@@ -24,6 +28,26 @@
     "video intelligence",
     "Google Cloud Video Intelligence API"
   ],
+  "contributors": [
+    "Ace Nassri <anassri@google.com>",
+    "Ali Ijaz Sheikh <ofrobots@google.com>",
+    "Evawere Ogbe <eoogbe@gmail.com>",
+    "Gus Class <gguuss@gmail.com>",
+    "Jason Dobry <jmdobry@users.noreply.github.com>",
+    "Luke Sneeringer <luke@sneeringer.com>",
+    "Luke Sneeringer <lukesneeringer@google.com>",
+    "Song Wang <songwang@google.com>",
+    "Stephen Sawchuk <sawchuk@gmail.com>",
+    "Stephen Sawchuk <stephenplusplus@users.noreply.github.com>",
+    "Stephen Sawchuk <stephenplusplusplus@gmail.com>",
+    "Tim Swast <swast@google.com>"
+  ],
+  "scripts": {
+    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
+    "publish-module": "node ../../scripts/publish.js video-intelligence",
+    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
+    "test": "mocha test/*.js"
+  },
   "dependencies": {
     "extend": "^3.0",
     "google-gax": "^0.14.2",
@@ -32,15 +56,5 @@
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.0.11",
     "mocha": "^3.2.0"
-  },
-  "scripts": {
-    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
-    "publish-module": "node ../../scripts/publish.js video-intelligence",
-    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
-    "test": "mocha test/*.js"
-  },
-  "license": "Apache-2.0",
-  "engines": {
-    "node": ">=4.0.0"
   }
 }
