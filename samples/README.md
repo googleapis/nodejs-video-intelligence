@@ -36,8 +36,7 @@ Commands:
   safe-search <gcsUri>  Detects explicit content in a video stored in Google Cloud Storage.
 
 Options:
-  --version  Show version number                                                                               [boolean]
-  --help     Show help                                                                                         [boolean]
+  --help  Show help                                                                                            [boolean]
 
 Examples:
   node analyze.js faces gs://demomaker/larry_sergey_ice_bucket_short.mp4
