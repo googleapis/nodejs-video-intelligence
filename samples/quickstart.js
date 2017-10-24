@@ -17,10 +17,10 @@
 
 // [START videointelligence_quickstart]
 // Imports the Google Cloud Video Intelligence library
-const video = require('@google-cloud/video-intelligence');
+const videoIntelligence = require('@google-cloud/video-intelligence');
 
-// Instantiates a client
-const client = new video.VideoIntelligenceServiceClient();
+// Creates a client
+const client = new videoIntelligence.VideoIntelligenceServiceClient();
 
 // The GCS filepath of the video to analyze
 const gcsUri = 'gs://nodejs-docs-samples-video/quickstart_short.mp4';

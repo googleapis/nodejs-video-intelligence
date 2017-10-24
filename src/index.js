@@ -16,16 +16,22 @@
  * @namespace google
  */
 /**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
  * @namespace google.cloud
  */
 /**
- * @namespace google.cloud.video-intelligence
+ * @namespace google.cloud.videointelligence
  */
 /**
- * @namespace google.cloud.video-intelligence.v1beta2
+ * @namespace google.cloud.videointelligence.v1beta2
  */
 /**
- * @namespace google.cloud.video-intelligence.v1beta1
+ * @namespace google.cloud.videointelligence.v1beta1
  */
 
 'use strict';
@@ -53,21 +59,17 @@ const gapic = Object.freeze({
  * @module {object} @google-cloud/video-intelligence
  * @alias nodejs-video-intelligence
  *
- * @example <caption>Install the client library with
- *   <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
  * npm install --save @google-cloud/video-intelligence
  *
  * @example <caption>Import the client library:</caption>
- * const video-intelligence = require('@google-cloud/video-intelligence');
+ * const videoIntelligence = require('@google-cloud/video-intelligence');
  *
- * @example <caption>Create a client that uses
- *   <a href="https://goo.gl/64dyYX">Application Default Credentials
- *   (ADC)</a>:</caption>
- * let client = new video-intelligence.VideoIntelligenceServiceClient();
+ * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
+ * const client = new videoIntelligence.VideoIntelligenceServiceClient();
  *
- * @example <caption>Create a client with
- *   <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * let client = new video-intelligence.VideoIntelligenceServiceClient({
+ * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
+ * const client = new videoIntelligence.VideoIntelligenceServiceClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });
