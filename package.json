@@ -30,6 +30,7 @@
     "protobufjs": "^6.8.0"
   },
   "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "^2.0.11",
     "mocha": "^3.2.0"
   },
   "scripts": {
