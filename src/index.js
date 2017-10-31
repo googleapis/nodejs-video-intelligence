@@ -28,6 +28,9 @@
  * @namespace google.cloud.videointelligence
  */
 /**
+ * @namespace google.cloud.videointelligence.v1
+ */
+/**
  * @namespace google.cloud.videointelligence.v1beta2
  */
 /**
@@ -38,6 +41,7 @@
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
+  v1: require('./v1'),
   v1beta2: require('./v1beta2'),
   v1beta1: require('./v1beta1'),
 });
@@ -47,6 +51,10 @@ const gapic = Object.freeze({
  *
  * - `VideoIntelligenceServiceClient` - Reference to
  *   {@link v1beta2.VideoIntelligenceServiceClient}
+ * - `v1` - This is used for selecting or pinning a
+ *   particular backend service version. It exports:
+ *     - `VideoIntelligenceServiceClient` - Reference to
+ *       {@link v1.VideoIntelligenceServiceClient}
  * - `v1beta2` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
  *     - `VideoIntelligenceServiceClient` - Reference to
@@ -82,10 +90,23 @@ const gapic = Object.freeze({
 /**
  * @type {object}
  * @property {constructor} VideoIntelligenceServiceClient
+ *   Reference to {@link v1.VideoIntelligenceServiceClient}
+ */
+module.exports = gapic.v1;
+
+/**
+ * @type {object}
+ * @property {constructor} VideoIntelligenceServiceClient
+ *   Reference to {@link v1.VideoIntelligenceServiceClient}
+ */
+module.exports.v1 = gapic.v1;
+
+/**
+ * @type {object}
+ * @property {constructor} VideoIntelligenceServiceClient
  *   Reference to {@link v1beta2.VideoIntelligenceServiceClient}
  */
-module.exports = gapic.v1beta2;
-
+module.exports.v1beta2 = gapic.v1beta2;
 /**
  * @type {object}
  * @property {constructor} VideoIntelligenceServiceClient
