@@ -69,6 +69,6 @@
     "mocha": "^4.0.1",
     "nyc": "^11.2.1",
     "power-assert": "^1.4.4",
-    "prettier": "^1.7.4"
+    "prettier": "^1.8.1"
   }
 }
