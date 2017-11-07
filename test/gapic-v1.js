@@ -83,7 +83,7 @@ describe('VideoIntelligenceServiceClient', () => {
           var operation = responses[0];
           return operation.promise();
         })
-        .then(responses => {
+        .then(() => {
           assert.fail();
         })
         .catch(err => {
@@ -111,19 +111,6 @@ describe('VideoIntelligenceServiceClient', () => {
     });
   });
 });
-
-function mockSimpleGrpcMethod(expectedRequest, response, error) {
-  return function(actualRequest, options, callback) {
-    assert.deepStrictEqual(actualRequest, expectedRequest);
-    if (error) {
-      callback(error);
-    } else if (response) {
-      callback(null, response);
-    } else {
-      callback(null);
-    }
-  };
-}
 
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
