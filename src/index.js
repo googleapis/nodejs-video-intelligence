@@ -50,7 +50,7 @@ const gapic = Object.freeze({
  * The `@google-cloud/video-intelligence` package has the following named exports:
  *
  * - `VideoIntelligenceServiceClient` - Reference to
- *   {@link v1beta2.VideoIntelligenceServiceClient}
+ *   {@link v1.VideoIntelligenceServiceClient}
  * - `v1` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
  *     - `VideoIntelligenceServiceClient` - Reference to
