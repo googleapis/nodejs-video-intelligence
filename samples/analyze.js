@@ -358,7 +358,8 @@ function analyzeSafeSearch(gcsUri) {
 function analyzeVideoTranscription(gcsUri) {
   // [START video_speech_transcription]
   // Imports the Google Cloud Video Intelligence library
-  const videoIntelligence = require('@google-cloud/video-intelligence').v1p1beta1;
+  const videoIntelligence = require('@google-cloud/video-intelligence')
+    .v1p1beta1;
 
   // Creates a client
   const client = new videoIntelligence.VideoIntelligenceServiceClient();
@@ -366,7 +367,7 @@ function analyzeVideoTranscription(gcsUri) {
   /**
    * TODO(developer): Uncomment the following line before running the sample.
    */
-  // const gcsUri = 'GCS URI of video to analyze, e.g. gs://my-bucket/my-video.mp4';  
+  // const gcsUri = 'GCS URI of video to analyze, e.g. gs://my-bucket/my-video.mp4';
 
   const videoContext = {
     speechTranscriptionConfig: {
@@ -389,11 +390,15 @@ function analyzeVideoTranscription(gcsUri) {
     })
     .then(results => {
       console.log('Word level information:');
-      const alternative = results[0].annotationResults[0].speechTranscriptions[0].alternatives[0];
+      const alternative =
+        results[0].annotationResults[0].speechTranscriptions[0].alternatives[0];
       alternative.words.forEach(wordInfo => {
-        let start_time = wordInfo.startTime.seconds + wordInfo.startTime.nanos * 1e-9;
+        let start_time =
+          wordInfo.startTime.seconds + wordInfo.startTime.nanos * 1e-9;
         let end_time = wordInfo.endTime.seconds + wordInfo.endTime.nanos * 1e-9;
-        console.log('\t' + start_time + 's - ' + end_time + 's: ' + wordInfo.word);
+        console.log(
+          '\t' + start_time + 's - ' + end_time + 's: ' + wordInfo.word
+        );
       });
       console.log('Transcription: ' + alternative.transcript);
     })

@@ -84,7 +84,13 @@ test.serial(`should analyze safe search results in a GCS file`, async t => {
 });
 
 // analyze_video_transcription
-test.serial(`should analyze video transcription results in a GCS file`, async t => {
-  const output = await tools.runAsync(`${cmd} transcription ${shortUrl}`, cwd);
-  t.regex(output, /over the past/);
-});
+test.serial(
+  `should analyze video transcription results in a GCS file`,
+  async t => {
+    const output = await tools.runAsync(
+      `${cmd} transcription ${shortUrl}`,
+      cwd
+    );
+    t.regex(output, /over the past/);
+  }
+);
