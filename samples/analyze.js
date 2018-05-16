@@ -15,8 +15,73 @@
 
 'use strict';
 
+function analyzeFaces(gcsUri) {
+  // [START video_analyze_faces]
+  // Imports the Google Cloud Video Intelligence library
+  const video = require('@google-cloud/video-intelligence').v1;
+
+  // Creates a client
+  const client = new video.VideoIntelligenceServiceClient();
+
+  /**
+   * TODO(developer): Uncomment the following line before running the sample.
+   */
+  // const gcsUri = 'GCS URI of the video to analyze, e.g. gs://my-bucket/my-video.mp4';
+
+  const request = {
+    inputUri: gcsUri,
+    features: ['FACE_DETECTION'],
+  };
+
+  // Detects faces in a video
+  client
+    .annotateVideo(request)
+    .then(results => {
+      const operation = results[0];
+      console.log('Waiting for operation to complete...');
+      return operation.promise();
+    })
+    .then(results => {
+      // Gets faces
+      const faces = results[0].annotationResults[0].faceAnnotations;
+      faces.forEach((face, faceIdx) => {
+        console.log(`Face #${faceIdx}`);
+        console.log(`\tThumbnail size: ${face.thumbnail.length}`);
+        face.segments.forEach((segment, segmentIdx) => {
+          segment = segment.segment;
+          if (segment.startTimeOffset.seconds === undefined) {
+            segment.startTimeOffset.seconds = 0;
+          }
+          if (segment.startTimeOffset.nanos === undefined) {
+            segment.startTimeOffset.nanos = 0;
+          }
+          if (segment.endTimeOffset.seconds === undefined) {
+            segment.endTimeOffset.seconds = 0;
+          }
+          if (segment.endTimeOffset.nanos === undefined) {
+            segment.endTimeOffset.nanos = 0;
+          }
+          console.log(`\tAppearance #${segmentIdx}:`);
+          console.log(
+            `\t\tStart: ${segment.startTimeOffset.seconds}` +
+              `.${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+          );
+          console.log(
+            `\t\tEnd: ${segment.endTimeOffset.seconds}.` +
+              `${(segment.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+          );
+        });
+        console.log(`\tLocations:`);
+      });
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END video_analyze_faces]
+}
+
 function analyzeLabelsGCS(gcsUri) {
-  // [START analyze_labels_gcs]
+  // [START video_analyze_labels_gcs]
   // Imports the Google Cloud Video Intelligence library
   const video = require('@google-cloud/video-intelligence').v1;
 
@@ -77,11 +142,11 @@ function analyzeLabelsGCS(gcsUri) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END analyze_labels_gcs]
+  // [END video_analyze_labels_gcs]
 }
 
 function analyzeLabelsLocal(path) {
-  // [START analyze_labels_local]
+  // [START video_analyze_labels_local]
   // Imports the Google Cloud Video Intelligence library + Node's fs library
   const video = require('@google-cloud/video-intelligence').v1;
   const fs = require('fs');
@@ -148,11 +213,11 @@ function analyzeLabelsLocal(path) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END analyze_labels_local]
+  // [END video_analyze_labels_local]
 }
 
 function analyzeShots(gcsUri) {
-  // [START analyze_shots]
+  // [START video_analyze_shots]
   // Imports the Google Cloud Video Intelligence library
   const video = require('@google-cloud/video-intelligence').v1;
 
@@ -219,11 +284,11 @@ function analyzeShots(gcsUri) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END analyze_shots]
+  // [END video_analyze_shots]
 }
 
 function analyzeSafeSearch(gcsUri) {
-  // [START analyze_safe_search]
+  // [START video_analyze_explicit_content]
   // Imports the Google Cloud Video Intelligence library
   const video = require('@google-cloud/video-intelligence').v1;
 
@@ -287,7 +352,7 @@ function analyzeSafeSearch(gcsUri) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END analyze_safe_search]
+  // [END video_analyze_explicit_content]
 }
 
 function analyzeVideoTranscription(gcsUri) {
