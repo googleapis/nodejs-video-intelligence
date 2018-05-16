@@ -411,12 +411,6 @@ function analyzeVideoTranscription(gcsUri) {
 require(`yargs`)
   .demand(1)
   .command(
-    `faces <gcsUri>`,
-    `Analyzes faces in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
-    {},
-    opts => analyzeFaces(opts.gcsUri)
-  )
-  .command(
     `shots <gcsUri>`,
     `Analyzes shot angles in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
     {},
@@ -446,7 +440,6 @@ require(`yargs`)
     {},
     opts => analyzeVideoTranscription(opts.gcsUri)
   )
-  .example(`node $0 faces gs://demomaker/larry_sergey_ice_bucket_short.mp4`)
   .example(`node $0 shots gs://demomaker/sushi.mp4`)
   .example(`node $0 labels-gcs gs://demomaker/tomatoes.mp4`)
   .example(`node $0 labels-file cat.mp4`)
