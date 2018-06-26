@@ -6,21 +6,19 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-video-intelligence",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "scripts": {
     "ava": "ava -T 20s --verbose test/*.test.js ./system-test/*.test.js",
     "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose test/*.test.js ./system-test/*.test.js && nyc report",
-    "test": "repo-tools test run --cmd ava -- -T 5m --verbose system-test/*.test.js"
+    "test": "ava -T 5m --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/video-intelligence": "1.2.0",
-    "long": "^4.0.0",
-    "safe-buffer": "5.1.2",
-    "yargs": "11.0.0"
+    "@google-cloud/video-intelligence": "^1.2.0",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.3.0",
-    "ava": "0.25.0"
+    "@google-cloud/nodejs-repo-tools": "^2.3.0",
+    "ava": "^0.25.0"
   }
 }
