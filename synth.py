@@ -23,6 +23,17 @@ for version in versions:
     )
 
 #
+# Generator emitted unused helper mockSimpleGrpcMethod, add a temporary
+# s.replace to remove that function.
+# ref: https://github.com/googleapis/gapic-generator/issues/2120
+#
+s.replace(
+    'test/gapic-*.js',
+    'function mockSimpleGrpcMethod.*\n(.*\n)*?}\n',
+    '',
+)
+
+#
 # Node.js specific cleanup
 #
 subprocess.run(['npm', 'install'])

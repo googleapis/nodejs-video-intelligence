@@ -124,19 +124,6 @@ describe('VideoIntelligenceServiceClient', () => {
   });
 });
 
-function mockSimpleGrpcMethod(expectedRequest, response, error) {
-  return function(actualRequest, options, callback) {
-    assert.deepStrictEqual(actualRequest, expectedRequest);
-    if (error) {
-      callback(error);
-    } else if (response) {
-      callback(null, response);
-    } else {
-      callback(null);
-    }
-  };
-}
-
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
     assert.deepStrictEqual(request, expectedRequest);
