@@ -25,12 +25,10 @@ error.code = FAKE_STATUS_CODE;
 describe('VideoIntelligenceServiceClient', () => {
   describe('annotateVideo', function() {
     it('invokes annotateVideo without error', done => {
-      var client = new videoIntelligenceModule.v1beta2.VideoIntelligenceServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      var client = new videoIntelligenceModule.v1beta2.VideoIntelligenceServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var inputUri = 'gs://demomaker/cat.mp4';
@@ -45,33 +43,24 @@ describe('VideoIntelligenceServiceClient', () => {
       var expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(
-        request,
-        expectedResponse
-      );
+      client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(request, expectedResponse);
 
-      client
-        .annotateVideo(request)
-        .then(responses => {
-          var operation = responses[0];
-          return operation.promise();
-        })
-        .then(responses => {
-          assert.deepStrictEqual(responses[0], expectedResponse);
-          done();
-        })
-        .catch(err => {
-          done(err);
-        });
+      client.annotateVideo(request).then(responses => {
+        var operation = responses[0];
+        return operation.promise();
+      }).then(responses => {
+        assert.deepStrictEqual(responses[0], expectedResponse);
+        done();
+      }).catch(err => {
+        done(err);
+      });
     });
 
     it('invokes annotateVideo with error', done => {
-      var client = new videoIntelligenceModule.v1beta2.VideoIntelligenceServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      var client = new videoIntelligenceModule.v1beta2.VideoIntelligenceServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       var inputUri = 'gs://demomaker/cat.mp4';
@@ -83,46 +72,32 @@ describe('VideoIntelligenceServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(
-        request,
-        null,
-        error
-      );
+      client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(request, null, error);
 
-      client
-        .annotateVideo(request)
-        .then(responses => {
-          var operation = responses[0];
-          return operation.promise();
-        })
-        .then(() => {
-          assert.fail();
-        })
-        .catch(err => {
-          assert(err instanceof Error);
-          assert.equal(err.code, FAKE_STATUS_CODE);
-          done();
-        });
+      client.annotateVideo(request).then(responses => {
+        var operation = responses[0];
+        return operation.promise();
+      }).then(() => {
+        assert.fail();
+      }).catch(err => {
+        assert(err instanceof Error);
+        assert.equal(err.code, FAKE_STATUS_CODE);
+        done();
+      });
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new videoIntelligenceModule.v1beta2.VideoIntelligenceServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert(
-        client._descriptors.longrunning.annotateVideo.responseDecoder instanceof
-          Function
-      );
-      assert(
-        client._descriptors.longrunning.annotateVideo.metadataDecoder instanceof
-          Function
-      );
+      var client = new videoIntelligenceModule.v1beta2.VideoIntelligenceServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(client._descriptors.longrunning.annotateVideo.responseDecoder instanceof Function);
+      assert(client._descriptors.longrunning.annotateVideo.metadataDecoder instanceof Function);
     });
   });
+
 });
+
 
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
@@ -132,11 +107,12 @@ function mockLongRunningGrpcMethod(expectedRequest, response, error) {
         return new Promise((resolve, reject) => {
           if (error) {
             reject(error);
-          } else {
+          }
+          else {
             resolve([response]);
           }
         });
-      },
+      }
     };
     return Promise.resolve([mockOperation]);
   };
