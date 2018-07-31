@@ -307,7 +307,7 @@ function analyzeVideoTranscription(gcsUri) {
   const videoContext = {
     speechTranscriptionConfig: {
       languageCode: 'en-US',
-      enableAutomaticPunctuation: true
+      enableAutomaticPunctuation2: true,
     },
   };
 
