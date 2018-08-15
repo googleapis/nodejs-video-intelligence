@@ -81,7 +81,7 @@ function analyzeLabelsGCS(gcsUri) {
 }
 
 function analyzeLabelsLocal(path) {
-  // [START video_analyze_labels_local]
+  // [START video_analyze_labels]
   // Imports the Google Cloud Video Intelligence library + Node's fs library
   const video = require('@google-cloud/video-intelligence').v1;
   const fs = require('fs');
@@ -148,7 +148,7 @@ function analyzeLabelsLocal(path) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END video_analyze_labels_local]
+  // [END video_analyze_labels]
 }
 
 function analyzeShots(gcsUri) {
