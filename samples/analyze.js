@@ -291,7 +291,7 @@ function analyzeSafeSearch(gcsUri) {
 }
 
 function analyzeVideoTranscription(gcsUri) {
-  // [START video_speech_transcription]
+  // [START video_speech_transcription_gcs_beta]
   // Imports the Google Cloud Video Intelligence library
   const videoIntelligence = require('@google-cloud/video-intelligence')
     .v1p1beta1;
@@ -341,7 +341,7 @@ function analyzeVideoTranscription(gcsUri) {
     .catch(err => {
       console.error('ERROR:', err);
     });
-  // [END video_speech_transcription]
+  // [END video_speech_transcription_gcs_beta]
 }
 
 require(`yargs`)
