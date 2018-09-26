@@ -32,7 +32,7 @@ npm link ../
 npm install
 cd ..
 
-npm run samples-test
+#npm run samples-test
 
 ### TODO: Remove me ###
 external_ip=$(curl -s -H "Metadata-Flavor: Google" http://metadata/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip)
