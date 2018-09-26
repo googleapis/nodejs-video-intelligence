@@ -32,4 +32,4 @@ npm link ../
 npm install
 cd ..
 
-node samples/quickstart.js
+npm run samples-test
