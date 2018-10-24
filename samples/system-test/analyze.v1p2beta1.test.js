@@ -1,5 +1,5 @@
 /**
- * Copyright 2017, Google, Inc.
+ * Copyright 2018, Google, Inc.
  * Licensed under the Apache License, Version 2.0 (the `License`);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,31 +28,16 @@ const shortUrl = `gs://nodejs-docs-samples/video/googlework_short.mp4`;
 const url = `gs://nodejs-docs-samples/video/cat.mp4`;
 const file1 = `resources/cat.mp4`;
 const file2 = `resources/googlework_short.mp4`;
-const possibleTexts = [
-  'Google',
-  'SUR',
-  'ROTO',
-  'Vice President',
-  '58oo9',
-  'LONDRES',
-  'OMAR',
-  'PARIS',
-  'METRO',
-  'RUE',
-  'CARLO',
-];
+const possibleTexts = /Google|GOOGLE|SUR|OMAR|ROTO|Vice President|58oo9|LONDRES|PARIS|METRO|RUE|CARLO/;
 
 test.serial(`should detect text in a GCS file`, async t => {
   const output = await tools.runAsync(`${cmd} video-text-gcs ${shortUrl}`, cwd);
-  //t.regex(output, /Label shirt occurs at:/);
-  t.regex(output, /Confidence: \d+\.\d+/);
+  t.regex(output, possibleTexts);
 });
 
 test.serial(`should detect text in a local file`, async t => {
   const output = await tools.runAsync(`${cmd} video-text ${file2}`, cwd);
-  t.true(output.includes(possibleTexts));
-  //t.regex(output, /Label shirt occurs at:/);
-  t.regex(output, /Confidence: \d+\.\d+/);
+  t.regex(output, possibleTexts);
 });
 
 test.serial(`should track objects in a GCS file`, async t => {

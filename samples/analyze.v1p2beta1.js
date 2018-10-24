@@ -40,10 +40,6 @@ function analyzeTextGCS(gcsUri) {
       return operation.promise();
     })
     .then(results => {
-      //console.log("check Annotation results"+anno.textAnnotations);
-      // console.log(
-      //   'textAnnotations:' + results[0].annotationResults[0].textAnnotations
-      // );
       // Gets annotations for video
       const textAnnotations = results[0].annotationResults[0].textAnnotations;
       textAnnotations.forEach(textAnnotation => {
@@ -362,19 +358,22 @@ require(`yargs`)
   )
   .command(
     `video-text <path>`,
-    `Analyzes text in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
+    `Analyzes text in a video stored in a local file using the Cloud Video Intelligence API.`,
     {},
     opts => analyzeText(opts.path)
   )
   .command(
     `track-objects <path>`,
-    `Analyzes objects in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
+    `Analyzes objects in a video stored in a local file using the Cloud Video Intelligence API.`,
     {},
     opts => analyzeObjectTracking(opts.path)
   )
+  .example(`node $0 video-text ./resources/googlework_short.mp4`)
   .example(
-    `node $0 track-objects-gcs gs://nodejs-docs-samples/video/googlework_short.mp4`
+    `node $0 video-text-gcs gs://nodejs-docs-samples/videos/googlework_short.mp4`
   )
+  .example(`node $0 track-objects ./resources/cat.mp4`)
+  .example(`node $0 track-objects-gcs gs://nodejs-docs-samples/video/cat.mp4`)
   .wrap(120)
   .recommendCommands()
   .epilogue(
