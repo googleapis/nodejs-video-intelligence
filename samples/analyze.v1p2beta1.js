@@ -1,5 +1,5 @@
 /**
- * Copyright 2017, Google, Inc.
+ * Copyright 2018, Google, Inc.
  * Licensed under the Apache License, Version 2.0 (the `License`);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,13 +14,13 @@
  */
 
 'use strict';
-function analyzeTextGCS(gcsUri) {
+async function analyzeTextGCS(gcsUri) {
   //[START video_detect_text_gcs_beta]
   // Imports the Google Cloud Video Intelligence library
-  const video = require('@google-cloud/video-intelligence').v1p2beta1;
+  const Video = require('@google-cloud/video-intelligence').v1p2beta1;
 
   // Creates a client
-  const client = new video.VideoIntelligenceServiceClient();
+  const video = new Video.VideoIntelligenceServiceClient();
 
   /**
    * TODO(developer): Uncomment the following line before running the sample.
@@ -32,73 +32,65 @@ function analyzeTextGCS(gcsUri) {
     features: ['TEXT_DETECTION'],
   };
   // Detects text in a video
-  client
-    .annotateVideo(request)
-    .then(results => {
-      const operation = results[0];
-      console.log('Waiting for operation to complete...');
-      return operation.promise();
-    })
-    .then(results => {
-      // Gets annotations for video
-      const textAnnotations = results[0].annotationResults[0].textAnnotations;
-      textAnnotations.forEach(textAnnotation => {
-        console.log(`Text ${textAnnotation.text} occurs at:`);
-        textAnnotation.segments.forEach(segment => {
-          const time = segment.segment;
-          if (time.startTimeOffset.seconds === undefined) {
-            time.startTimeOffset.seconds = 0;
-          }
-          if (time.startTimeOffset.nanos === undefined) {
-            time.startTimeOffset.nanos = 0;
-          }
-          if (time.endTimeOffset.seconds === undefined) {
-            time.endTimeOffset.seconds = 0;
-          }
-          if (time.endTimeOffset.nanos === undefined) {
-            time.endTimeOffset.nanos = 0;
-          }
-          console.log(
-            `\tStart: ${time.startTimeOffset.seconds}` +
-              `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
-          );
-          console.log(
-            `\tEnd: ${time.endTimeOffset.seconds}.` +
-              `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
-          );
-          console.log(`\tConfidence: ${segment.confidence}`);
-          segment.frames.forEach(frame => {
-            const timeOffset = frame.timeOffset;
-            if (timeOffset.seconds === undefined) {
-              timeOffset.seconds = 0;
-            }
-            if (timeOffset.nanos === undefined) {
-              timeOffset.nanos = 0;
-            }
-            console.log(
-              `Time offset for the frame: ${timeOffset.seconds}` +
-                `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
-            );
-            console.log(`Rotated Bounding Box Vertices:`);
-            frame.rotatedBoundingBox.vertices.forEach(vertex => {
-              console.log(`Vertex.x:${vertex.x}, Vertex.y:${vertex.y}`);
-            });
-          });
+  const [operation] = await video.annotateVideo(request);
+  const results = await operation.promise();
+  console.log('Waiting for operation to complete...');
+  // Gets annotations for video
+  const textAnnotations = results[0].annotationResults[0].textAnnotations;
+  textAnnotations.forEach(textAnnotation => {
+    console.log(`Text ${textAnnotation.text} occurs at:`);
+    textAnnotation.segments.forEach(segment => {
+      const time = segment.segment;
+      if (time.startTimeOffset.seconds === undefined) {
+        time.startTimeOffset.seconds = 0;
+      }
+      if (time.startTimeOffset.nanos === undefined) {
+        time.startTimeOffset.nanos = 0;
+      }
+      if (time.endTimeOffset.seconds === undefined) {
+        time.endTimeOffset.seconds = 0;
+      }
+      if (time.endTimeOffset.nanos === undefined) {
+        time.endTimeOffset.nanos = 0;
+      }
+      console.log(
+        `\tStart: ${time.startTimeOffset.seconds}` +
+          `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+      );
+      console.log(
+        `\tEnd: ${time.endTimeOffset.seconds}.` +
+          `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+      );
+      console.log(`\tConfidence: ${segment.confidence}`);
+      segment.frames.forEach(frame => {
+        const timeOffset = frame.timeOffset;
+        if (timeOffset.seconds === undefined) {
+          timeOffset.seconds = 0;
+        }
+        if (timeOffset.nanos === undefined) {
+          timeOffset.nanos = 0;
+        }
+        console.log(
+          `Time offset for the frame: ${timeOffset.seconds}` +
+            `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
+        );
+        console.log(`Rotated Bounding Box Vertices:`);
+        frame.rotatedBoundingBox.vertices.forEach(vertex => {
+          console.log(`Vertex.x:${vertex.x}, Vertex.y:${vertex.y}`);
         });
       });
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
     });
+  });
   // [END video_detect_text_gcs_beta]
 }
-function analyzeObjectTrackingGCS(gcsUri) {
+
+async function analyzeObjectTrackingGCS(gcsUri) {
   //[START video_object_tracking_gcs_beta]
   // Imports the Google Cloud Video Intelligence library
-  const video = require('@google-cloud/video-intelligence').v1p2beta1;
+  const Video = require('@google-cloud/video-intelligence').v1p2beta1;
 
   // Creates a client
-  const client = new video.VideoIntelligenceServiceClient();
+  const video = new Video.VideoIntelligenceServiceClient();
 
   /**
    * TODO(developer): Uncomment the following line before running the sample.
@@ -111,74 +103,65 @@ function analyzeObjectTrackingGCS(gcsUri) {
     //recommended to use us-east1 for the best latency due to different types of processors used in this region and others
     locationId: 'us-east1',
   };
-  // Detects text in a video
-  client
-    .annotateVideo(request)
-    .then(results => {
-      const operation = results[0];
-      console.log('Waiting for operation to complete...');
-      return operation.promise();
-    })
-    .then(results => {
-      //Gets annotations for video
-      const annotations = results[0].annotationResults[0];
-      const objects = annotations.objectAnnotations;
-      objects.forEach(object => {
-        console.log(`Entity description:  ${object.entity.description}`);
-        console.log(`Entity id: ${object.entity.entityId}`);
-        const time = object.segment;
-        if (time.startTimeOffset.seconds === undefined) {
-          time.startTimeOffset.seconds = 0;
-        }
-        if (time.startTimeOffset.nanos === undefined) {
-          time.startTimeOffset.nanos = 0;
-        }
-        if (time.endTimeOffset.seconds === undefined) {
-          time.endTimeOffset.seconds = 0;
-        }
-        if (time.endTimeOffset.nanos === undefined) {
-          time.endTimeOffset.nanos = 0;
-        }
-        console.log(
-          `Segment: ${time.startTimeOffset.seconds}` +
-            `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${
-              time.endTimeOffset.seconds
-            }.` +
-            `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
-        );
-        console.log(`Confidence: ${object.confidence}`);
-        const frame = object.frames[0];
-        const box = frame.normalizedBoundingBox;
-        const timeOffset = frame.timeOffset;
-        if (timeOffset.seconds === undefined) {
-          timeOffset.seconds = 0;
-        }
-        if (timeOffset.nanos === undefined) {
-          timeOffset.nanos = 0;
-        }
-        console.log(
-          `Time offset for the first frame: ${timeOffset.seconds}` +
-            `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
-        );
-        console.log(`Bounding box position:`);
-        console.log(`\tleft   :${box.left}`);
-        console.log(`\ttop    :${box.top}`);
-        console.log(`\tright  :${box.right}`);
-        console.log(`\tbottom :${box.bottom}`);
-      });
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  // Detects objects in a video
+  const [operation] = await video.annotateVideo(request);
+  const results = await operation.promise();
+  console.log('Waiting for operation to complete...');
+  //Gets annotations for video
+  const annotations = results[0].annotationResults[0];
+  const objects = annotations.objectAnnotations;
+  objects.forEach(object => {
+    console.log(`Entity description:  ${object.entity.description}`);
+    console.log(`Entity id: ${object.entity.entityId}`);
+    const time = object.segment;
+    if (time.startTimeOffset.seconds === undefined) {
+      time.startTimeOffset.seconds = 0;
+    }
+    if (time.startTimeOffset.nanos === undefined) {
+      time.startTimeOffset.nanos = 0;
+    }
+    if (time.endTimeOffset.seconds === undefined) {
+      time.endTimeOffset.seconds = 0;
+    }
+    if (time.endTimeOffset.nanos === undefined) {
+      time.endTimeOffset.nanos = 0;
+    }
+    console.log(
+      `Segment: ${time.startTimeOffset.seconds}` +
+        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${
+          time.endTimeOffset.seconds
+        }.` +
+        `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+    );
+    console.log(`Confidence: ${object.confidence}`);
+    const frame = object.frames[0];
+    const box = frame.normalizedBoundingBox;
+    const timeOffset = frame.timeOffset;
+    if (timeOffset.seconds === undefined) {
+      timeOffset.seconds = 0;
+    }
+    if (timeOffset.nanos === undefined) {
+      timeOffset.nanos = 0;
+    }
+    console.log(
+      `Time offset for the first frame: ${timeOffset.seconds}` +
+        `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
+    );
+    console.log(`Bounding box position:`);
+    console.log(`\tleft   :${box.left}`);
+    console.log(`\ttop    :${box.top}`);
+    console.log(`\tright  :${box.right}`);
+    console.log(`\tbottom :${box.bottom}`);
+  });
   // [END video_object_tracking_gcs_beta]
 }
-function analyzeText(path) {
+async function analyzeText(path) {
   //[START video_detect_text_beta]
   // Imports the Google Cloud Video Intelligence library + Node's fs library
-  const video = require('@google-cloud/video-intelligence').v1p2beta1;
+  const Video = require('@google-cloud/video-intelligence').v1p2beta1;
   const fs = require('fs');
   // Creates a client
-  const client = new video.VideoIntelligenceServiceClient();
+  const video = new Video.VideoIntelligenceServiceClient();
 
   /**
    * TODO(developer): Uncomment the following line before running the sample.
@@ -194,77 +177,64 @@ function analyzeText(path) {
     features: ['TEXT_DETECTION'],
   };
   // Detects text in a video
-  client
-    .annotateVideo(request)
-    .then(results => {
-      const operation = results[0];
-      console.log('Waiting for operation to complete...');
-      return operation.promise();
-    })
-    .then(results => {
-      //console.log("check Annotation results"+anno.textAnnotations);
-      // console.log(
-      //   'textAnnotations:' + results[0].annotationResults[0].textAnnotations
-      // );
-      // Gets annotations for video
-      const textAnnotations = results[0].annotationResults[0].textAnnotations;
-      textAnnotations.forEach(textAnnotation => {
-        console.log(`Text ${textAnnotation.text} occurs at:`);
-        textAnnotation.segments.forEach(segment => {
-          const time = segment.segment;
-          if (time.startTimeOffset.seconds === undefined) {
-            time.startTimeOffset.seconds = 0;
-          }
-          if (time.startTimeOffset.nanos === undefined) {
-            time.startTimeOffset.nanos = 0;
-          }
-          if (time.endTimeOffset.seconds === undefined) {
-            time.endTimeOffset.seconds = 0;
-          }
-          if (time.endTimeOffset.nanos === undefined) {
-            time.endTimeOffset.nanos = 0;
-          }
-          console.log(
-            `\tStart: ${time.startTimeOffset.seconds}` +
-              `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
-          );
-          console.log(
-            `\tEnd: ${time.endTimeOffset.seconds}.` +
-              `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
-          );
-          console.log(`\tConfidence: ${segment.confidence}`);
-          segment.frames.forEach(frame => {
-            const timeOffset = frame.timeOffset;
-            if (timeOffset.seconds === undefined) {
-              timeOffset.seconds = 0;
-            }
-            if (timeOffset.nanos === undefined) {
-              timeOffset.nanos = 0;
-            }
-            console.log(
-              `Time offset for the frame: ${timeOffset.seconds}` +
-                `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
-            );
-            console.log(`Rotated Bounding Box Vertices:`);
-            frame.rotatedBoundingBox.vertices.forEach(vertex => {
-              console.log(`Vertex.x:${vertex.x}, Vertex.y:${vertex.y}`);
-            });
-          });
+  const [operation] = await video.annotateVideo(request);
+  const results = await operation.promise();
+  console.log('Waiting for operation to complete...');
+  // Gets annotations for video
+  const textAnnotations = results[0].annotationResults[0].textAnnotations;
+  textAnnotations.forEach(textAnnotation => {
+    console.log(`Text ${textAnnotation.text} occurs at:`);
+    textAnnotation.segments.forEach(segment => {
+      const time = segment.segment;
+      if (time.startTimeOffset.seconds === undefined) {
+        time.startTimeOffset.seconds = 0;
+      }
+      if (time.startTimeOffset.nanos === undefined) {
+        time.startTimeOffset.nanos = 0;
+      }
+      if (time.endTimeOffset.seconds === undefined) {
+        time.endTimeOffset.seconds = 0;
+      }
+      if (time.endTimeOffset.nanos === undefined) {
+        time.endTimeOffset.nanos = 0;
+      }
+      console.log(
+        `\tStart: ${time.startTimeOffset.seconds}` +
+          `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+      );
+      console.log(
+        `\tEnd: ${time.endTimeOffset.seconds}.` +
+          `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+      );
+      console.log(`\tConfidence: ${segment.confidence}`);
+      segment.frames.forEach(frame => {
+        const timeOffset = frame.timeOffset;
+        if (timeOffset.seconds === undefined) {
+          timeOffset.seconds = 0;
+        }
+        if (timeOffset.nanos === undefined) {
+          timeOffset.nanos = 0;
+        }
+        console.log(
+          `Time offset for the frame: ${timeOffset.seconds}` +
+            `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
+        );
+        console.log(`Rotated Bounding Box Vertices:`);
+        frame.rotatedBoundingBox.vertices.forEach(vertex => {
+          console.log(`Vertex.x:${vertex.x}, Vertex.y:${vertex.y}`);
         });
       });
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
     });
+  });
   // [END video_detect_text_beta]
 }
-function analyzeObjectTracking(path) {
+async function analyzeObjectTracking(path) {
   //[START video_object_tracking_beta]
   // Imports the Google Cloud Video Intelligence library
-  const video = require('@google-cloud/video-intelligence').v1p2beta1;
+  const Video = require('@google-cloud/video-intelligence').v1p2beta1;
 
   // Creates a client
-  const client = new video.VideoIntelligenceServiceClient();
+  const video = new Video.VideoIntelligenceServiceClient();
   const fs = require('fs');
   /**
    * TODO(developer): Uncomment the following line before running the sample.
@@ -281,65 +251,56 @@ function analyzeObjectTracking(path) {
     //recommended to use us-east1 for the best latency due to different types of processors used in this region and others
     locationId: 'us-east1',
   };
-  // Detects text in a video
-  client
-    .annotateVideo(request)
-    .then(results => {
-      const operation = results[0];
-      console.log('Waiting for operation to complete...');
-      return operation.promise();
-    })
-    .then(results => {
-      //Gets annotations for video
-      const annotations = results[0].annotationResults[0];
-      const objects = annotations.objectAnnotations;
-      objects.forEach(object => {
-        console.log(`Entity description:  ${object.entity.description}`);
-        console.log(`Entity id: ${object.entity.entityId}`);
-        const time = object.segment;
-        if (time.startTimeOffset.seconds === undefined) {
-          time.startTimeOffset.seconds = 0;
-        }
-        if (time.startTimeOffset.nanos === undefined) {
-          time.startTimeOffset.nanos = 0;
-        }
-        if (time.endTimeOffset.seconds === undefined) {
-          time.endTimeOffset.seconds = 0;
-        }
-        if (time.endTimeOffset.nanos === undefined) {
-          time.endTimeOffset.nanos = 0;
-        }
-        console.log(
-          `Segment: ${time.startTimeOffset.seconds}` +
-            `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${
-              time.endTimeOffset.seconds
-            }.` +
-            `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
-        );
-        console.log(`Confidence: ${object.confidence}`);
-        const frame = object.frames[0];
-        const box = frame.normalizedBoundingBox;
-        const timeOffset = frame.timeOffset;
-        if (timeOffset.seconds === undefined) {
-          timeOffset.seconds = 0;
-        }
-        if (timeOffset.nanos === undefined) {
-          timeOffset.nanos = 0;
-        }
-        console.log(
-          `Time offset for the first frame: ${timeOffset.seconds}` +
-            `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
-        );
-        console.log(`Bounding box position:`);
-        console.log(`\tleft   :${box.left}`);
-        console.log(`\ttop    :${box.top}`);
-        console.log(`\tright  :${box.right}`);
-        console.log(`\tbottom :${box.bottom}`);
-      });
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  // Detects objects in a video
+  const [operation] = await video.annotateVideo(request);
+  const results = await operation.promise();
+  console.log('Waiting for operation to complete...');
+  //Gets annotations for video
+  const annotations = results[0].annotationResults[0];
+  const objects = annotations.objectAnnotations;
+  objects.forEach(object => {
+    console.log(`Entity description:  ${object.entity.description}`);
+    console.log(`Entity id: ${object.entity.entityId}`);
+    const time = object.segment;
+    if (time.startTimeOffset.seconds === undefined) {
+      time.startTimeOffset.seconds = 0;
+    }
+    if (time.startTimeOffset.nanos === undefined) {
+      time.startTimeOffset.nanos = 0;
+    }
+    if (time.endTimeOffset.seconds === undefined) {
+      time.endTimeOffset.seconds = 0;
+    }
+    if (time.endTimeOffset.nanos === undefined) {
+      time.endTimeOffset.nanos = 0;
+    }
+    console.log(
+      `Segment: ${time.startTimeOffset.seconds}` +
+        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${
+          time.endTimeOffset.seconds
+        }.` +
+        `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+    );
+    console.log(`Confidence: ${object.confidence}`);
+    const frame = object.frames[0];
+    const box = frame.normalizedBoundingBox;
+    const timeOffset = frame.timeOffset;
+    if (timeOffset.seconds === undefined) {
+      timeOffset.seconds = 0;
+    }
+    if (timeOffset.nanos === undefined) {
+      timeOffset.nanos = 0;
+    }
+    console.log(
+      `Time offset for the first frame: ${timeOffset.seconds}` +
+        `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
+    );
+    console.log(`Bounding box position:`);
+    console.log(`\tleft   :${box.left}`);
+    console.log(`\ttop    :${box.top}`);
+    console.log(`\tright  :${box.right}`);
+    console.log(`\tbottom :${box.bottom}`);
+  });
   // [END video_object_tracking_beta]
 }
 require(`yargs`)
