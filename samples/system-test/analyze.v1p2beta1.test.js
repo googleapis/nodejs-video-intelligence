@@ -35,18 +35,18 @@ test.serial(`should detect text in a GCS file`, async t => {
   t.regex(output, possibleTexts);
 });
 
-test.serial(`should detect text in a local file`, async t => {
+test.skip.serial(`should detect text in a local file`, async t => {
   const output = await tools.runAsync(`${cmd} video-text ${file2}`, cwd);
   t.regex(output, possibleTexts);
 });
 
-test.serial(`should track objects in a GCS file`, async t => {
+test.skip.serial(`should track objects in a GCS file`, async t => {
   const output = await tools.runAsync(`${cmd} track-objects-gcs ${url}`, cwd);
   t.regex(output, /cat/);
   t.regex(output, /Confidence: \d+\.\d+/);
 });
 
-test.serial(`should track objects in a local file`, async t => {
+test.skip.serial(`should track objects in a local file`, async t => {
   const output = await tools.runAsync(`${cmd} track-objects ${file1}`, cwd);
   t.regex(output, /cat/);
   t.regex(output, /Confidence: \d+\.\d+/);
