@@ -18,7 +18,6 @@ async function analyzeTextGCS(gcsUri) {
   //[START video_detect_text_gcs_beta]
   // Imports the Google Cloud Video Intelligence library
   const Video = require('@google-cloud/video-intelligence').v1p2beta1;
-
   // Creates a client
   const video = new Video.VideoIntelligenceServiceClient();
 
