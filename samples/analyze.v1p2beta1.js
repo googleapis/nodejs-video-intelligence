@@ -32,7 +32,6 @@ async function analyzeTextGCS(gcsUri) {
   };
   // Detects text in a video
   const [operation] = await video.annotateVideo(request);
-  //console.log(operation);
   const results = await operation.promise();
   console.log('Waiting for operation to complete...');
   // Gets annotations for video
@@ -105,7 +104,6 @@ async function analyzeObjectTrackingGCS(gcsUri) {
   };
   // Detects objects in a video
   const [operation] = await video.annotateVideo(request);
-  //console.log(operation);
   const results = await operation.promise();
   console.log('Waiting for operation to complete...');
   //Gets annotations for video
@@ -161,6 +159,7 @@ async function analyzeText(path) {
   // Imports the Google Cloud Video Intelligence library + Node's fs library
   const Video = require('@google-cloud/video-intelligence').v1p2beta1;
   const fs = require('fs');
+  const util = require('util');
   // Creates a client
   const video = new Video.VideoIntelligenceServiceClient();
 
@@ -170,7 +169,7 @@ async function analyzeText(path) {
   // const path = 'Local file to analyze, e.g. ./my-file.mp4';
 
   // Reads a local video file and converts it to base64
-  const file = fs.readFileSync(path);
+  const file = await util.promisify(fs.readFile)(path);
   const inputContent = file.toString('base64');
 
   const request = {
@@ -179,7 +178,6 @@ async function analyzeText(path) {
   };
   // Detects text in a video
   const [operation] = await video.annotateVideo(request);
-  //console.log(operation);
   const results = await operation.promise();
   console.log('Waiting for operation to complete...');
 
@@ -235,17 +233,17 @@ async function analyzeObjectTracking(path) {
   //[START video_object_tracking_beta]
   // Imports the Google Cloud Video Intelligence library
   const Video = require('@google-cloud/video-intelligence').v1p2beta1;
-
+  const fs = require('fs');
+  const util = require('util');
   // Creates a client
   const video = new Video.VideoIntelligenceServiceClient();
-  const fs = require('fs');
   /**
    * TODO(developer): Uncomment the following line before running the sample.
    */
   // const path = 'Local file to analyze, e.g. ./my-file.mp4';
 
   // Reads a local video file and converts it to base64
-  const file = fs.readFileSync(path);
+  const file = await util.promisify(fs.readFile)(path);
   const inputContent = file.toString('base64');
 
   const request = {
@@ -256,7 +254,6 @@ async function analyzeObjectTracking(path) {
   };
   // Detects objects in a video
   const [operation] = await video.annotateVideo(request);
-  //console.log(operation);
   const results = await operation.promise();
   console.log('Waiting for operation to complete...');
   //Gets annotations for video
