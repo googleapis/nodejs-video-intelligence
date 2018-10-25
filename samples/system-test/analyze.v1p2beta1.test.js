@@ -30,23 +30,23 @@ const file1 = `resources/cat.mp4`;
 const file2 = `resources/googlework_short.mp4`;
 const possibleTexts = /Google|GOOGLE|SUR|OMAR|ROTO|Vice President|58oo9|LONDRES|PARIS|METRO|RUE|CARLO/;
 
-test.serial(`should detect text in a GCS file`, async t => {
+test.skip.serial(`should detect text in a GCS file`, async t => {
   const output = await tools.runAsync(`${cmd} video-text-gcs ${shortUrl}`, cwd);
   t.regex(output, possibleTexts);
 });
 
-test.serial(`should detect text in a local file`, async t => {
+test.skip.serial(`should detect text in a local file`, async t => {
   const output = await tools.runAsync(`${cmd} video-text ${file2}`, cwd);
   t.regex(output, possibleTexts);
 });
 
-test.serial(`should track objects in a GCS file`, async t => {
+test.skip.serial(`should track objects in a GCS file`, async t => {
   const output = await tools.runAsync(`${cmd} track-objects-gcs ${url}`, cwd);
   t.regex(output, /cat/);
   t.regex(output, /Confidence: \d+\.\d+/);
 });
 
-test.serial(`should track objects in a local file`, async t => {
+test.skip.serial(`should track objects in a local file`, async t => {
   const output = await tools.runAsync(`${cmd} track-objects ${file1}`, cwd);
   t.regex(output, /cat/);
   t.regex(output, /Confidence: \d+\.\d+/);
