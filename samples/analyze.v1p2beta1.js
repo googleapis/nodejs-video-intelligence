@@ -1,5 +1,5 @@
 /**
- * Copyright 2018, Google, Inc.
+ * Copyright 2018, Google, LLC
  * Licensed under the Apache License, Version 2.0 (the `License`);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -180,6 +180,7 @@ async function analyzeText(path) {
   const [operation] = await video.annotateVideo(request);
   const results = await operation.promise();
   console.log('Waiting for operation to complete...');
+
   // Gets annotations for video
   const textAnnotations = results[0].annotationResults[0].textAnnotations;
   textAnnotations.forEach(textAnnotation => {
