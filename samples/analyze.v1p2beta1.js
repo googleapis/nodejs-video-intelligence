@@ -32,6 +32,7 @@ async function analyzeTextGCS(gcsUri) {
   };
   // Detects text in a video
   const [operation] = await video.annotateVideo(request);
+  console.log(operation);
   const results = await operation.promise();
   console.log('Waiting for operation to complete...');
   // Gets annotations for video
@@ -104,6 +105,7 @@ async function analyzeObjectTrackingGCS(gcsUri) {
   };
   // Detects objects in a video
   const [operation] = await video.annotateVideo(request);
+  console.log(operation);
   const results = await operation.promise();
   console.log('Waiting for operation to complete...');
   //Gets annotations for video
@@ -177,6 +179,7 @@ async function analyzeText(path) {
   };
   // Detects text in a video
   const [operation] = await video.annotateVideo(request);
+  console.log(operation);
   const results = await operation.promise();
   console.log('Waiting for operation to complete...');
 
@@ -253,6 +256,7 @@ async function analyzeObjectTracking(path) {
   };
   // Detects objects in a video
   const [operation] = await video.annotateVideo(request);
+  console.log(operation);
   const results = await operation.promise();
   console.log('Waiting for operation to complete...');
   //Gets annotations for video
