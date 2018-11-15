@@ -312,25 +312,25 @@ async function main() {
       `video-text-gcs <gcsUri>`,
       `Analyzes text in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
       {},
-      async opts => await analyzeTextGCS(opts.gcsUri)
+      opts => analyzeTextGCS(opts.gcsUri)
     )
     .command(
       `track-objects-gcs <gcsUri>`,
       `Analyzes objects in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
       {},
-      async opts => await analyzeObjectTrackingGCS(opts.gcsUri)
+      opts => analyzeObjectTrackingGCS(opts.gcsUri)
     )
     .command(
       `video-text <path>`,
       `Analyzes text in a video stored in a local file using the Cloud Video Intelligence API.`,
       {},
-      async opts => await analyzeText(opts.path)
+      opts => analyzeText(opts.path)
     )
     .command(
       `track-objects <path>`,
       `Analyzes objects in a video stored in a local file using the Cloud Video Intelligence API.`,
       {},
-      async opts => await analyzeObjectTracking(opts.path)
+      opts => analyzeObjectTracking(opts.path)
     )
     .example(`node $0 video-text ./resources/googlework_short.mp4`)
     .example(

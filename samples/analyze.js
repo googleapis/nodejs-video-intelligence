@@ -309,31 +309,31 @@ async function main() {
       `shots <gcsUri>`,
       `Analyzes shot angles in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
       {},
-      async opts => await analyzeShots(opts.gcsUri)
+      opts => analyzeShots(opts.gcsUri)
     )
     .command(
       `labels-gcs <gcsUri>`,
       `Labels objects in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
       {},
-      async opts => await analyzeLabelsGCS(opts.gcsUri)
+      opts => analyzeLabelsGCS(opts.gcsUri)
     )
     .command(
       `labels-file <filePath>`,
       `Labels objects in a video stored locally using the Cloud Video Intelligence API.`,
       {},
-      async opts => await analyzeLabelsLocal(opts.filePath)
+      opts => analyzeLabelsLocal(opts.filePath)
     )
     .command(
       `safe-search <gcsUri>`,
       `Detects explicit content in a video stored in Google Cloud Storage.`,
       {},
-      async opts => await analyzeSafeSearch(opts.gcsUri)
+      opts => analyzeSafeSearch(opts.gcsUri)
     )
     .command(
       `transcription <gcsUri>`,
       `Extract the video transcription using the Cloud Video Intelligence API.`,
       {},
-      async opts => await analyzeVideoTranscription(opts.gcsUri)
+      opts => analyzeVideoTranscription(opts.gcsUri)
     )
     .example(`node $0 shots gs://demomaker/sushi.mp4`)
     .example(`node $0 labels-gcs gs://demomaker/tomatoes.mp4`)
