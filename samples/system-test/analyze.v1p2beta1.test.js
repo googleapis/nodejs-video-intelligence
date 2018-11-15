@@ -18,7 +18,7 @@
 'use strict';
 
 const path = require(`path`);
-const test = require(`ava`);
+const assert = require(`assert`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 
 const cmd = `node analyze.v1p2beta1.js`;
@@ -30,24 +30,24 @@ const file1 = `resources/cat.mp4`;
 const file2 = `resources/googlework_short.mp4`;
 const possibleTexts = /Google|GOOGLE|SUR|OMAR|ROTO|Vice President|58oo9|LONDRES|PARIS|METRO|RUE|CARLO/;
 
-test.serial(`should detect text in a GCS file`, async t => {
+it(`should detect text in a GCS file`, async () => {
   const output = await tools.runAsync(`${cmd} video-text-gcs ${shortUrl}`, cwd);
-  t.regex(output, possibleTexts);
+  assert.strictEqual(new RegExp(possibleTexts).test(output), true);
 });
 
-test.serial(`should detect text in a local file`, async t => {
+it(`should detect text in a local file`, async () => {
   const output = await tools.runAsync(`${cmd} video-text ${file2}`, cwd);
-  t.regex(output, possibleTexts);
+  assert.strictEqual(new RegExp(possibleTexts).test(output), true);
 });
 
-test.serial(`should track objects in a GCS file`, async t => {
+it(`should track objects in a GCS file`, async () => {
   const output = await tools.runAsync(`${cmd} track-objects-gcs ${url}`, cwd);
-  t.regex(output, /cat/);
-  t.regex(output, /Confidence: \d+\.\d+/);
+  assert.strictEqual(new RegExp(/cat/).test(output), true);
+  assert.strictEqual(new RegExp(/Confidence: \d+\.\d+/).test(output), true);
 });
 
-test.serial(`should track objects in a local file`, async t => {
+it(`should track objects in a local file`, async () => {
   const output = await tools.runAsync(`${cmd} track-objects ${file1}`, cwd);
-  t.regex(output, /cat/);
-  t.regex(output, /Confidence: \d+\.\d+/);
+  assert.strictEqual(new RegExp(/cat/).test(output), true);
+  assert.strictEqual(new RegExp(/Confidence: \d+\.\d+/).test(output), true);
 });
