@@ -286,7 +286,7 @@ async function analyzeVideoTranscription(gcsUri) {
 
   const [operation] = await client.annotateVideo(request);
   console.log('Waiting for operation to complete...');
-  const operationResult = await operation.promise();
+  const [operationResult] = await operation.promise();
   console.log('Word level information:');
   const alternative =
     operationResult.annotationResults[0].speechTranscriptions[0]
