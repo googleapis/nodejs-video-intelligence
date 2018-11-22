@@ -304,42 +304,47 @@ async function analyzeObjectTracking(path) {
   });
   // [END video_object_tracking_beta]
 }
-require(`yargs`)
-  .demand(1)
-  .command(
-    `video-text-gcs <gcsUri>`,
-    `Analyzes text in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
-    {},
-    opts => analyzeTextGCS(opts.gcsUri)
-  )
-  .command(
-    `track-objects-gcs <gcsUri>`,
-    `Analyzes objects in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
-    {},
-    opts => analyzeObjectTrackingGCS(opts.gcsUri)
-  )
-  .command(
-    `video-text <path>`,
-    `Analyzes text in a video stored in a local file using the Cloud Video Intelligence API.`,
-    {},
-    opts => analyzeText(opts.path)
-  )
-  .command(
-    `track-objects <path>`,
-    `Analyzes objects in a video stored in a local file using the Cloud Video Intelligence API.`,
-    {},
-    opts => analyzeObjectTracking(opts.path)
-  )
-  .example(`node $0 video-text ./resources/googlework_short.mp4`)
-  .example(
-    `node $0 video-text-gcs gs://nodejs-docs-samples/videos/googlework_short.mp4`
-  )
-  .example(`node $0 track-objects ./resources/cat.mp4`)
-  .example(`node $0 track-objects-gcs gs://nodejs-docs-samples/video/cat.mp4`)
-  .wrap(120)
-  .recommendCommands()
-  .epilogue(
-    `For more information, see https://cloud.google.com/video-intelligence/docs`
-  )
-  .help()
-  .strict().argv;
+
+async function main() {
+  require(`yargs`)
+    .demand(1)
+    .command(
+      `video-text-gcs <gcsUri>`,
+      `Analyzes text in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
+      {},
+      opts => analyzeTextGCS(opts.gcsUri)
+    )
+    .command(
+      `track-objects-gcs <gcsUri>`,
+      `Analyzes objects in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
+      {},
+      opts => analyzeObjectTrackingGCS(opts.gcsUri)
+    )
+    .command(
+      `video-text <path>`,
+      `Analyzes text in a video stored in a local file using the Cloud Video Intelligence API.`,
+      {},
+      opts => analyzeText(opts.path)
+    )
+    .command(
+      `track-objects <path>`,
+      `Analyzes objects in a video stored in a local file using the Cloud Video Intelligence API.`,
+      {},
+      opts => analyzeObjectTracking(opts.path)
+    )
+    .example(`node $0 video-text ./resources/googlework_short.mp4`)
+    .example(
+      `node $0 video-text-gcs gs://nodejs-docs-samples/videos/googlework_short.mp4`
+    )
+    .example(`node $0 track-objects ./resources/cat.mp4`)
+    .example(`node $0 track-objects-gcs gs://nodejs-docs-samples/video/cat.mp4`)
+    .wrap(120)
+    .recommendCommands()
+    .epilogue(
+      `For more information, see https://cloud.google.com/video-intelligence/docs`
+    )
+    .help()
+    .strict().argv;
+}
+
+main().catch(console.error);
