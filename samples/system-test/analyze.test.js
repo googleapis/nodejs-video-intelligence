@@ -25,8 +25,8 @@ const cmd = 'node analyze.js';
 const cwd = path.join(__dirname, '..');
 const url = 'gs://nodejs-docs-samples-video/quickstart.mp4';
 const shortUrl = 'gs://nodejs-docs-samples-video/quickstart_short.mp4';
+const catUrl = 'gs://nodejs-docs-samples/video/cat.mp';
 const file = 'resources/cat.mp4';
-const file1 = 'resources/cat.mp4';
 const file2 = 'resources/googlework_short.mp4';
 const possibleTexts = /Google|GOOGLE|SUR|OMAR|ROTO|Vice President|58oo9|LONDRES|PARIS|METRO|RUE|CARLO/;
 
@@ -93,14 +93,14 @@ describe('analyze samples', () => {
 
   //object_tracking_gcs
   it('should track objects in a GCS file', async () => {
-    const output = await exec(`${cmd} track-objects-gcs ${url}`);
+    const output = await exec(`${cmd} track-objects-gcs ${catUrl}`);
     assert.match(output, /cat/);
     assert.match(output, /Confidence: \d+\.\d+/);
   });
 
   //object_tracking
   it('should track objects in a local file', async () => {
-    const output = await exec(`${cmd} track-objects ${file1}`);
+    const output = await exec(`${cmd} track-objects ${file}`);
     assert.match(output, /cat/);
     assert.match(output, /Confidence: \d+\.\d+/);
   });

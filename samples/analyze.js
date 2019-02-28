@@ -302,9 +302,10 @@ async function analyzeVideoTranscription(gcsUri) {
 }
 
 async function analyzeTextGCS(gcsUri) {
+  //gcsUri - GCS URI of the video to analyze, e.g. gs://my-bucket/my-video.mp4
   //[START video_detect_text_gcs]
   // Imports the Google Cloud Video Intelligence library
-  const Video = require('@google-cloud/video-intelligence').v1;
+  const Video = require('@google-cloud/video-intelligence');
   // Creates a client
   const video = new Video.VideoIntelligenceServiceClient();
 
@@ -327,37 +328,21 @@ async function analyzeTextGCS(gcsUri) {
     console.log(`Text ${textAnnotation.text} occurs at:`);
     textAnnotation.segments.forEach(segment => {
       const time = segment.segment;
-      if (time.startTimeOffset.seconds === undefined) {
-        time.startTimeOffset.seconds = 0;
-      }
-      if (time.startTimeOffset.nanos === undefined) {
-        time.startTimeOffset.nanos = 0;
-      }
-      if (time.endTimeOffset.seconds === undefined) {
-        time.endTimeOffset.seconds = 0;
-      }
-      if (time.endTimeOffset.nanos === undefined) {
-        time.endTimeOffset.nanos = 0;
-      }
       console.log(
-        `\tStart: ${time.startTimeOffset.seconds}` +
-          `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+        ` Start: ${time.startTimeOffset.seconds || 0}.${(
+          time.startTimeOffset.nanos / 1e6
+        ).toFixed(0)}s`
       );
       console.log(
-        `\tEnd: ${time.endTimeOffset.seconds}.` +
-          `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+        ` End: ${time.endTimeOffset.seconds || 0}.${(
+          time.endTimeOffset.nanos / 1e6
+        ).toFixed(0)}s`
       );
-      console.log(`\tConfidence: ${segment.confidence}`);
+      console.log(` Confidence: ${segment.confidence}`);
       segment.frames.forEach(frame => {
         const timeOffset = frame.timeOffset;
-        if (timeOffset.seconds === undefined) {
-          timeOffset.seconds = 0;
-        }
-        if (timeOffset.nanos === undefined) {
-          timeOffset.nanos = 0;
-        }
         console.log(
-          `Time offset for the frame: ${timeOffset.seconds}` +
+          `Time offset for the frame: ${timeOffset.seconds || 0}` +
             `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
         );
         console.log(`Rotated Bounding Box Vertices:`);
@@ -373,7 +358,7 @@ async function analyzeTextGCS(gcsUri) {
 async function analyzeObjectTrackingGCS(gcsUri) {
   //[START video_object_tracking_gcs]
   // Imports the Google Cloud Video Intelligence library
-  const Video = require('@google-cloud/video-intelligence').v1;
+  const Video = require('@google-cloud/video-intelligence');
 
   // Creates a client
   const video = new Video.VideoIntelligenceServiceClient();
@@ -445,7 +430,7 @@ async function analyzeObjectTrackingGCS(gcsUri) {
 async function analyzeText(path) {
   //[START video_detect_text]
   // Imports the Google Cloud Video Intelligence library + Node's fs library
-  const Video = require('@google-cloud/video-intelligence').v1;
+  const Video = require('@google-cloud/video-intelligence');
   const fs = require('fs');
   const util = require('util');
   // Creates a client
@@ -521,7 +506,7 @@ async function analyzeText(path) {
 async function analyzeObjectTracking(path) {
   //[START video_object_tracking]
   // Imports the Google Cloud Video Intelligence library
-  const Video = require('@google-cloud/video-intelligence').v1;
+  const Video = require('@google-cloud/video-intelligence');
   const fs = require('fs');
   const util = require('util');
   // Creates a client
