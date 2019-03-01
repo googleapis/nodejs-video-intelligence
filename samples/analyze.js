@@ -356,6 +356,7 @@ async function analyzeTextGCS(gcsUri) {
 }
 
 async function analyzeObjectTrackingGCS(gcsUri) {
+  //gcsUri - GCS URI of the video to analyze, e.g. gs://my-bucket/my-video.mp4
   //[START video_object_tracking_gcs]
   // Imports the Google Cloud Video Intelligence library
   const Video = require('@google-cloud/video-intelligence');
@@ -385,44 +386,25 @@ async function analyzeObjectTrackingGCS(gcsUri) {
     console.log(`Entity description:  ${object.entity.description}`);
     console.log(`Entity id: ${object.entity.entityId}`);
     const time = object.segment;
-    if (time.startTimeOffset.seconds === undefined) {
-      time.startTimeOffset.seconds = 0;
-    }
-    if (time.startTimeOffset.nanos === undefined) {
-      time.startTimeOffset.nanos = 0;
-    }
-    if (time.endTimeOffset.seconds === undefined) {
-      time.endTimeOffset.seconds = 0;
-    }
-    if (time.endTimeOffset.nanos === undefined) {
-      time.endTimeOffset.nanos = 0;
-    }
     console.log(
-      `Segment: ${time.startTimeOffset.seconds}` +
-        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${
-          time.endTimeOffset.seconds
-        }.` +
+      `Segment: ${time.startTimeOffset.seconds || 0}` +
+        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${time
+          .endTimeOffset.seconds || 0}.` +
         `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
     );
     console.log(`Confidence: ${object.confidence}`);
     const frame = object.frames[0];
     const box = frame.normalizedBoundingBox;
     const timeOffset = frame.timeOffset;
-    if (timeOffset.seconds === undefined) {
-      timeOffset.seconds = 0;
-    }
-    if (timeOffset.nanos === undefined) {
-      timeOffset.nanos = 0;
-    }
     console.log(
-      `Time offset for the first frame: ${timeOffset.seconds}` +
+      `Time offset for the first frame: ${timeOffset.seconds || 0}` +
         `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
     );
     console.log(`Bounding box position:`);
-    console.log(`\tleft   :${box.left}`);
-    console.log(`\ttop    :${box.top}`);
-    console.log(`\tright  :${box.right}`);
-    console.log(`\tbottom :${box.bottom}`);
+    console.log(` left   :${box.left}`);
+    console.log(` top    :${box.top}`);
+    console.log(` right  :${box.right}`);
+    console.log(` bottom :${box.bottom}`);
   });
   // [END video_object_tracking_gcs]
 }
@@ -473,24 +455,18 @@ async function analyzeText(path) {
         time.endTimeOffset.nanos = 0;
       }
       console.log(
-        `\tStart: ${time.startTimeOffset.seconds}` +
+        `\tStart: ${time.startTimeOffset.seconds || 0}` +
           `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
       console.log(
-        `\tEnd: ${time.endTimeOffset.seconds}.` +
+        `\tEnd: ${time.endTimeOffset.seconds || 0}.` +
           `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
       console.log(`\tConfidence: ${segment.confidence}`);
       segment.frames.forEach(frame => {
         const timeOffset = frame.timeOffset;
-        if (timeOffset.seconds === undefined) {
-          timeOffset.seconds = 0;
-        }
-        if (timeOffset.nanos === undefined) {
-          timeOffset.nanos = 0;
-        }
         console.log(
-          `Time offset for the frame: ${timeOffset.seconds}` +
+          `Time offset for the frame: ${timeOffset.seconds || 0}` +
             `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
         );
         console.log(`Rotated Bounding Box Vertices:`);
@@ -537,44 +513,25 @@ async function analyzeObjectTracking(path) {
     console.log(`Entity description:  ${object.entity.description}`);
     console.log(`Entity id: ${object.entity.entityId}`);
     const time = object.segment;
-    if (time.startTimeOffset.seconds === undefined) {
-      time.startTimeOffset.seconds = 0;
-    }
-    if (time.startTimeOffset.nanos === undefined) {
-      time.startTimeOffset.nanos = 0;
-    }
-    if (time.endTimeOffset.seconds === undefined) {
-      time.endTimeOffset.seconds = 0;
-    }
-    if (time.endTimeOffset.nanos === undefined) {
-      time.endTimeOffset.nanos = 0;
-    }
     console.log(
-      `Segment: ${time.startTimeOffset.seconds}` +
-        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${
-          time.endTimeOffset.seconds
-        }.` +
+      `Segment: ${time.startTimeOffset.seconds || 0}` +
+        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${time
+          .endTimeOffset.seconds || 0}.` +
         `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
     );
     console.log(`Confidence: ${object.confidence}`);
     const frame = object.frames[0];
     const box = frame.normalizedBoundingBox;
     const timeOffset = frame.timeOffset;
-    if (timeOffset.seconds === undefined) {
-      timeOffset.seconds = 0;
-    }
-    if (timeOffset.nanos === undefined) {
-      timeOffset.nanos = 0;
-    }
     console.log(
-      `Time offset for the first frame: ${timeOffset.seconds}` +
+      `Time offset for the first frame: ${timeOffset.seconds || 0}` +
         `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
     );
     console.log(`Bounding box position:`);
-    console.log(`\tleft   :${box.left}`);
-    console.log(`\ttop    :${box.top}`);
-    console.log(`\tright  :${box.right}`);
-    console.log(`\tbottom :${box.bottom}`);
+    console.log(` left   :${box.left}`);
+    console.log(` top    :${box.top}`);
+    console.log(` right  :${box.right}`);
+    console.log(` bottom :${box.bottom}`);
   });
   // [END video_object_tracking]
 }
