@@ -15,15 +15,11 @@
 
 'use strict';
 
-const path = require('path');
 const {execSync} = require('child_process');
 const {assert} = require('chai');
 
 const cmd = `node analyze-streaming-annotation-to-storage.js`;
-const cwd = path.join(__dirname, '..');
 const project = process.env.GLCOUD_PROJECT;
-const exec = async cmd => (await execa.shell(cmd, {cwd})).stdout;
-
 const file = 'resources/cat.mp4';
 const outputUri = 'gs://' + project + '/VIDEO_STREAMING_OUTPUT';
 

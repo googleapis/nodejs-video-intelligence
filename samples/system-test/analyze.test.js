@@ -17,20 +17,16 @@
 
 'use strict';
 
-const path = require('path');
 const {assert} = require('chai');
 const {execSync} = require('child_process');
 
 const cmd = 'node analyze.js';
-const cwd = path.join(__dirname, '..');
 const url = 'gs://nodejs-docs-samples-video/quickstart.mp4';
 const shortUrl = 'gs://nodejs-docs-samples-video/quickstart_short.mp4';
 const catUrl = 'gs://nodejs-docs-samples/video/cat.mp4';
 const file = 'resources/cat.mp4';
 const file2 = 'resources/googlework_short.mp4';
 const possibleTexts = /Google|GOOGLE|SUR|OMAR|ROTO|Vice President|58oo9|LONDRES|PARIS|METRO|RUE|CARLO/;
-
-const exec = async cmd => (await execa.shell(cmd, {cwd})).stdout;
 
 describe('analyze samples', () => {
   // analyze_labels_gcs (one scene)

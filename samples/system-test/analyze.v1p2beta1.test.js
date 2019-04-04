@@ -17,14 +17,10 @@
 
 'use strict';
 
-const path = require('path');
 const {assert} = require('chai');
 const {execSync} = require('child_process');
 
 const cmd = 'node analyze.v1p2beta1.js';
-const cwd = path.join(__dirname, '..');
-const exec = async cmd => (await execa.shell(cmd, {cwd})).stdout;
-
 const shortUrl = 'gs://nodejs-docs-samples/video/googlework_short.mp4';
 const url = 'gs://nodejs-docs-samples/video/cat.mp4';
 const file1 = 'resources/cat.mp4';
