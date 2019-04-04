@@ -16,7 +16,7 @@
 'use strict';
 
 const path = require('path');
-const execa = require('execa');
+const {execSync} = require('child_process');
 const {assert} = require('chai');
 
 const cmd = `node analyze-streaming-shot-change.js`;
@@ -27,7 +27,7 @@ const file = 'resources/cat.mp4';
 
 describe('streaming shot change', () => {
   it('should analyze shot changes in a streaming video', async () => {
-    const output = await exec(`${cmd} ${file}`);
+    const output = execSync(`${cmd} ${file}`);
     assert.match(output, /The entire video is one shot./);
   });
 });
