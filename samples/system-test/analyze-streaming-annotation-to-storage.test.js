@@ -15,10 +15,8 @@
 
 'use strict';
 
-const cp = require('child_process');
+const {execSync} = require('child_process');
 const {assert} = require('chai');
-
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cmd = `node analyze-streaming-annotation-to-storage.js`;
 const project = process.env.GLCOUD_PROJECT;
