@@ -22,8 +22,6 @@ const cp = require('child_process');
 
 const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
-
 const cmd = 'node analyze.v1p2beta1.js';
 const shortUrl = 'gs://nodejs-docs-samples/video/googlework_short.mp4';
 const url = 'gs://nodejs-docs-samples/video/cat.mp4';
