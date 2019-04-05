@@ -20,8 +20,6 @@ const {assert} = require('chai');
 
 const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
-
 const cmd = `node analyze-streaming-shot-change.js`;
 const file = 'resources/cat.mp4';
 
