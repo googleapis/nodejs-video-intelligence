@@ -23,6 +23,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('VideoIntelligenceServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      videointelligenceModule.v1beta1.VideoIntelligenceServiceClient
+        .servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      videointelligenceModule.v1beta1.VideoIntelligenceServiceClient
+        .apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port =
+      videointelligenceModule.v1beta1.VideoIntelligenceServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
   describe('annotateVideo', function() {
     it('invokes annotateVideo without error', done => {
       const client = new videointelligenceModule.v1beta1.VideoIntelligenceServiceClient(
