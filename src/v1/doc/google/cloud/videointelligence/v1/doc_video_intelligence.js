@@ -23,10 +23,10 @@
  *   [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
  *   supported, which must be specified in the following format:
  *   `gs://bucket-id/object-id` (other URI formats return
- *   google.rpc.Code.INVALID_ARGUMENT). For
- *   more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris). A video
- *   URI may include wildcards in `object-id`, and thus identify multiple
- *   videos. Supported wildcards: '*' to match 0 or more characters;
+ *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
+ *   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+ *   A video URI may include wildcards in `object-id`, and thus identify
+ *   multiple videos. Supported wildcards: '*' to match 0 or more characters;
  *   '?' to match 1 character. If unset, the input video should be embedded
  *   in the request as `input_content`. If set, `input_content` should be unset.
  *
@@ -50,8 +50,8 @@
  *   Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
  *   URIs are supported, which must be specified in the following format:
  *   `gs://bucket-id/object-id` (other URI formats return
- *   google.rpc.Code.INVALID_ARGUMENT). For
- *   more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+ *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
+ *   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
  *
  * @property {string} locationId
  *   Optional cloud region where annotation should take place. Supported cloud
@@ -90,11 +90,6 @@ const AnnotateVideoRequest = {
  *   Config for EXPLICIT_CONTENT_DETECTION.
  *
  *   This object should have the same structure as [ExplicitContentDetectionConfig]{@link google.cloud.videointelligence.v1.ExplicitContentDetectionConfig}
- *
- * @property {Object} faceDetectionConfig
- *   Config for FACE_DETECTION.
- *
- *   This object should have the same structure as [FaceDetectionConfig]{@link google.cloud.videointelligence.v1.FaceDetectionConfig}
  *
  * @property {Object} speechTranscriptionConfig
  *   Config for SPEECH_TRANSCRIPTION.
@@ -180,41 +175,6 @@ const ShotChangeDetectionConfig = {
 };
 
 /**
- * Config for EXPLICIT_CONTENT_DETECTION.
- *
- * @property {string} model
- *   Model to use for explicit content detection.
- *   Supported values: "builtin/stable" (the default if unset) and
- *   "builtin/latest".
- *
- * @typedef ExplicitContentDetectionConfig
- * @memberof google.cloud.videointelligence.v1
- * @see [google.cloud.videointelligence.v1.ExplicitContentDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
- */
-const ExplicitContentDetectionConfig = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Config for FACE_DETECTION.
- *
- * @property {string} model
- *   Model to use for face detection.
- *   Supported values: "builtin/stable" (the default if unset) and
- *   "builtin/latest".
- *
- * @property {boolean} includeBoundingBoxes
- *   Whether bounding boxes be included in the face annotation output.
- *
- * @typedef FaceDetectionConfig
- * @memberof google.cloud.videointelligence.v1
- * @see [google.cloud.videointelligence.v1.FaceDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
- */
-const FaceDetectionConfig = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
  * Config for OBJECT_TRACKING.
  *
  * @property {string} model
@@ -227,6 +187,22 @@ const FaceDetectionConfig = {
  * @see [google.cloud.videointelligence.v1.ObjectTrackingConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
  */
 const ObjectTrackingConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Config for EXPLICIT_CONTENT_DETECTION.
+ *
+ * @property {string} model
+ *   Model to use for explicit content detection.
+ *   Supported values: "builtin/stable" (the default if unset) and
+ *   "builtin/latest".
+ *
+ * @typedef ExplicitContentDetectionConfig
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.ExplicitContentDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const ExplicitContentDetectionConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -437,70 +413,6 @@ const NormalizedBoundingBox = {
 };
 
 /**
- * Video segment level annotation results for face detection.
- *
- * @property {Object} segment
- *   Video segment where a face was detected.
- *
- *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1.VideoSegment}
- *
- * @typedef FaceSegment
- * @memberof google.cloud.videointelligence.v1
- * @see [google.cloud.videointelligence.v1.FaceSegment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
- */
-const FaceSegment = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Video frame level annotation results for face detection.
- *
- * @property {Object[]} normalizedBoundingBoxes
- *   Normalized Bounding boxes in a frame.
- *   There can be more than one boxes if the same face is detected in multiple
- *   locations within the current frame.
- *
- *   This object should have the same structure as [NormalizedBoundingBox]{@link google.cloud.videointelligence.v1.NormalizedBoundingBox}
- *
- * @property {Object} timeOffset
- *   Time-offset, relative to the beginning of the video,
- *   corresponding to the video frame for this location.
- *
- *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
- *
- * @typedef FaceFrame
- * @memberof google.cloud.videointelligence.v1
- * @see [google.cloud.videointelligence.v1.FaceFrame definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
- */
-const FaceFrame = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Face annotation.
- *
- * @property {Buffer} thumbnail
- *   Thumbnail of a representative face view (in JPEG format).
- *
- * @property {Object[]} segments
- *   All video segments where a face was detected.
- *
- *   This object should have the same structure as [FaceSegment]{@link google.cloud.videointelligence.v1.FaceSegment}
- *
- * @property {Object[]} frames
- *   All video frames where a face was detected.
- *
- *   This object should have the same structure as [FaceFrame]{@link google.cloud.videointelligence.v1.FaceFrame}
- *
- * @typedef FaceAnnotation
- * @memberof google.cloud.videointelligence.v1
- * @see [google.cloud.videointelligence.v1.FaceAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
- */
-const FaceAnnotation = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
  * Annotation results for a single video.
  *
  * @property {string} inputUri
@@ -508,13 +420,13 @@ const FaceAnnotation = {
  *   [Google Cloud Storage](https://cloud.google.com/storage/).
  *
  * @property {Object[]} segmentLabelAnnotations
- *   Label annotations on video level or user specified segment level.
+ *   Topical label annotations on video level or user specified segment level.
  *   There is exactly one element for each unique label.
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1.LabelAnnotation}
  *
  * @property {Object[]} shotLabelAnnotations
- *   Label annotations on shot level.
+ *   Topical label annotations on shot level.
  *   There is exactly one element for each unique label.
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1.LabelAnnotation}
@@ -524,11 +436,6 @@ const FaceAnnotation = {
  *   There is exactly one element for each unique label.
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1.LabelAnnotation}
- *
- * @property {Object[]} faceAnnotations
- *   Face annotations. There is exactly one element for each unique face.
- *
- *   This object should have the same structure as [FaceAnnotation]{@link google.cloud.videointelligence.v1.FaceAnnotation}
  *
  * @property {Object[]} shotAnnotations
  *   Shot annotations. Each shot is represented as a video segment.
@@ -609,6 +516,18 @@ const AnnotateVideoResponse = {
  *   Time of the most recent update.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @property {number} feature
+ *   Specifies which feature is being tracked if the request contains more than
+ *   one features.
+ *
+ *   The number should be among the values of [Feature]{@link google.cloud.videointelligence.v1.Feature}
+ *
+ * @property {Object} segment
+ *   Specifies which segment is being tracked if the request contains more than
+ *   one segments.
+ *
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1.VideoSegment}
  *
  * @typedef VideoAnnotationProgress
  * @memberof google.cloud.videointelligence.v1
@@ -756,15 +675,17 @@ const SpeechTranscription = {
  *   Transcript text representing the words that the user spoke.
  *
  * @property {number} confidence
- *   The confidence estimate between 0.0 and 1.0. A higher number
+ *   Output only. The confidence estimate between 0.0 and 1.0. A higher number
  *   indicates an estimated greater likelihood that the recognized words are
- *   correct. This field is typically provided only for the top hypothesis, and
- *   only for `is_final=true` results. Clients should not rely on the
- *   `confidence` field as it is not guaranteed to be accurate or consistent.
+ *   correct. This field is set only for the top alternative.
+ *   This field is not guaranteed to be accurate and users should not rely on it
+ *   to be always provided.
  *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
  *
  * @property {Object[]} words
- *   A list of word-specific information for each recognized word.
+ *   Output only. A list of word-specific information for each recognized word.
+ *   Note: When `enable_speaker_diarization` is true, you will see all the words
+ *   from the beginning of the audio.
  *
  *   This object should have the same structure as [WordInfo]{@link google.cloud.videointelligence.v1.WordInfo}
  *
@@ -1032,11 +953,6 @@ const Feature = {
    * Explicit content detection.
    */
   EXPLICIT_CONTENT_DETECTION: 3,
-
-  /**
-   * Human face detection and tracking.
-   */
-  FACE_DETECTION: 4,
 
   /**
    * Speech transcription.
