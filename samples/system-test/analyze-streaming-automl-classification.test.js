@@ -21,14 +21,15 @@ const {assert} = require('chai');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cmd = `node analyze-streaming-automl-classification.js`;
-const modelId = `VCN6363999689846554624`; //TODO: mkae a model in the nodejs testing project
+const modelId = `VCN652168724945567744`;
 const project = process.env.GLCOUD_PROJECT;
 const file = 'resources/cat.mp4';
 
-describe.only('streaming automl classification', () => { //TODO: remove .only
-    it('should classify the action in the streaming video', async () => {
-      const output = execSync(`${cmd} ${file} ${project} ${modelId}`);
-      assert.match(output, /cat/); //Change
-      assert.match(output, /Confidence: \d+\.\d+/); //Change
-    });
+describe('streaming automl classification', () => {
+  it('should classify the action in the streaming video', async () => {
+    const output = execSync(`${cmd} ${file} ${project} ${modelId}`);
+    assert.match(output, /brush_hair/);
+    assert.match(output, /cartwheel/);
+    assert.match(output, /Confidence: \d+\.\d+/);
   });
+});
