@@ -22,7 +22,7 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cmd = `node analyze-streaming-automl-classification.js`;
 const modelId = `VCN652168724945567744`;
-const project = process.env.GLCOUD_PROJECT;
+const project = process.env.GCLOUD_PROJECT;
 const file = 'resources/cat.mp4';
 
 describe('streaming automl classification', () => {
