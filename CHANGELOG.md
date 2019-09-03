@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [2.2.3](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.2.2...v2.2.3) (2019-09-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v14 ([0a1363c](https://www.github.com/googleapis/nodejs-video-intelligence/commit/0a1363c))
+
 ### [2.2.2](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.2.1...v2.2.2) (2019-08-05)
 
 
