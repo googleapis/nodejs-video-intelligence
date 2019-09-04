@@ -46,11 +46,15 @@ async function main(
       },
     },
   };
+
   const readStream = fs.createReadStream(path, {
     highWaterMark: 5 * 1024 * 1024, //chunk size set to 5MB (recommended less than 10MB)
     encoding: 'base64',
   });
   //Load file content
+  // Note: Input videos must have supported video codecs. See
+  // https://cloud.google.com/video-intelligence/docs/streaming/streaming#supported_video_codecs
+  // for more details.
   const chunks = [];
   readStream
     .on('data', chunk => {
