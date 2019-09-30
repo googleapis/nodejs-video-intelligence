@@ -23,8 +23,8 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cmd = 'node analyze.js';
-const url = 'gs://cloud-samples-data/datalabeling/video/VID_1.mp4';
-const shortUrl = 'gs://cloud-samples-data/datalabeling/video/VID_2.mp4';
+const url = 'gs://cloud-samples-data/datalabeling/videos/VID_1.mp4';
+const shortUrl = 'gs://cloud-samples-data/datalabeling/videos/VID_2.mp4';
 const catUrl = 'gs://cloud-samples-data/video/cat.mp4';
 const file = 'resources/cat.mp4';
 const file2 = 'resources/googlework_short.mp4';
