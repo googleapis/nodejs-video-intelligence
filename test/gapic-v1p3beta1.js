@@ -25,22 +25,17 @@ error.code = FAKE_STATUS_CODE;
 
 describe('VideoIntelligenceServiceClient', () => {
   it('has servicePath', () => {
-    const servicePath =
-      videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient
-        .servicePath;
+    const servicePath = videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient.servicePath;
     assert(servicePath);
   });
 
   it('has apiEndpoint', () => {
-    const apiEndpoint =
-      videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient
-        .apiEndpoint;
+    const apiEndpoint = videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient.apiEndpoint;
     assert(apiEndpoint);
   });
 
   it('has port', () => {
-    const port =
-      videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient.port;
+    const port = videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
@@ -51,20 +46,16 @@ describe('VideoIntelligenceServiceClient', () => {
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient(
-      {fallback: true}
-    );
+    const client = new videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient({fallback: true});
     assert(client);
   });
 
   describe('annotateVideo', function() {
     it('invokes annotateVideo without error', done => {
-      const client = new videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
@@ -79,33 +70,24 @@ describe('VideoIntelligenceServiceClient', () => {
       const expectedResponse = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(
-        request,
-        expectedResponse
-      );
+      client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(request, expectedResponse);
 
-      client
-        .annotateVideo(request)
-        .then(responses => {
-          const operation = responses[0];
-          return operation.promise();
-        })
-        .then(responses => {
-          assert.deepStrictEqual(responses[0], expectedResponse);
-          done();
-        })
-        .catch(err => {
-          done(err);
-        });
+      client.annotateVideo(request).then(responses => {
+        const operation = responses[0];
+        return operation.promise();
+      }).then(responses => {
+        assert.deepStrictEqual(responses[0], expectedResponse);
+        done();
+      }).catch(err => {
+        done(err);
+      });
     });
 
     it('invokes annotateVideo with error', done => {
-      const client = new videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
@@ -117,65 +99,44 @@ describe('VideoIntelligenceServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(
-        request,
-        null,
-        error
-      );
+      client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(request, null, error);
 
-      client
-        .annotateVideo(request)
-        .then(responses => {
-          const operation = responses[0];
-          return operation.promise();
-        })
-        .then(() => {
-          assert.fail();
-        })
-        .catch(err => {
-          assert(err instanceof Error);
-          assert.strictEqual(err.code, FAKE_STATUS_CODE);
-          done();
-        });
+      client.annotateVideo(request).then(responses => {
+        const operation = responses[0];
+        return operation.promise();
+      }).then(() => {
+        assert.fail();
+      }).catch(err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
     });
 
     it('has longrunning decoder functions', () => {
-      const client = new videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert(
-        client._descriptors.longrunning.annotateVideo.responseDecoder instanceof
-          Function
-      );
-      assert(
-        client._descriptors.longrunning.annotateVideo.metadataDecoder instanceof
-          Function
-      );
+      const client = new videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(client._descriptors.longrunning.annotateVideo.responseDecoder instanceof Function);
+      assert(client._descriptors.longrunning.annotateVideo.metadataDecoder instanceof Function);
     });
   });
+
 });
 describe('StreamingVideoIntelligenceServiceClient', () => {
   it('has servicePath', () => {
-    const servicePath =
-      videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient
-        .servicePath;
+    const servicePath = videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient.servicePath;
     assert(servicePath);
   });
 
   it('has apiEndpoint', () => {
-    const apiEndpoint =
-      videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient
-        .apiEndpoint;
+    const apiEndpoint = videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient.apiEndpoint;
     assert(apiEndpoint);
   });
 
   it('has port', () => {
-    const port =
-      videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient
-        .port;
+    const port = videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
@@ -186,20 +147,16 @@ describe('StreamingVideoIntelligenceServiceClient', () => {
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
-      {fallback: true}
-    );
+    const client = new videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({fallback: true});
     assert(client);
   });
 
   describe('streamingAnnotateVideo', () => {
     it('invokes streamingAnnotateVideo without error', done => {
-      const client = new videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       const request = {};
@@ -211,57 +168,44 @@ describe('StreamingVideoIntelligenceServiceClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.streamingAnnotateVideo = mockBidiStreamingGrpcMethod(
-        request,
-        expectedResponse
-      );
+      client._innerApiCalls.streamingAnnotateVideo = mockBidiStreamingGrpcMethod(request, expectedResponse);
 
-      const stream = client
-        .streamingAnnotateVideo()
-        .on('data', response => {
-          assert.deepStrictEqual(response, expectedResponse);
-          done();
-        })
-        .on('error', err => {
-          done(err);
-        });
+      const stream = client.streamingAnnotateVideo().on('data', response => {
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      }).on('error', err => {
+        done(err);
+      });
 
       stream.write(request);
     });
 
     it('invokes streamingAnnotateVideo with error', done => {
-      const client = new videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client = new videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
 
       // Mock request
       const request = {};
 
       // Mock Grpc layer
-      client._innerApiCalls.streamingAnnotateVideo = mockBidiStreamingGrpcMethod(
-        request,
-        null,
-        error
-      );
+      client._innerApiCalls.streamingAnnotateVideo = mockBidiStreamingGrpcMethod(request, null, error);
 
-      const stream = client
-        .streamingAnnotateVideo()
-        .on('data', () => {
-          assert.fail();
-        })
-        .on('error', err => {
-          assert(err instanceof Error);
-          assert.strictEqual(err.code, FAKE_STATUS_CODE);
-          done();
-        });
+      const stream = client.streamingAnnotateVideo().on('data', () => {
+        assert.fail();
+      }).on('error', err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
 
       stream.write(request);
     });
   });
+
 });
+
 
 function mockBidiStreamingGrpcMethod(expectedRequest, response, error) {
   return () => {
@@ -271,13 +215,14 @@ function mockBidiStreamingGrpcMethod(expectedRequest, response, error) {
         assert.deepStrictEqual(chunk, expectedRequest);
         if (error) {
           callback(error);
-        } else {
+        }
+        else {
           callback(null, response);
         }
-      },
+      }
     });
     return mockStream;
-  };
+  }
 }
 
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
@@ -288,11 +233,12 @@ function mockLongRunningGrpcMethod(expectedRequest, response, error) {
         return new Promise((resolve, reject) => {
           if (error) {
             reject(error);
-          } else {
+          }
+          else {
             resolve([response]);
           }
         });
-      },
+      }
     };
     return Promise.resolve([mockOperation]);
   };
