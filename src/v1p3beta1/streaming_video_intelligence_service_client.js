@@ -69,7 +69,9 @@ class StreamingVideoIntelligenceServiceClient {
     const gaxModule = !global.isBrowser && opts.fallback ? gax.fallback : gax;
 
     const servicePath =
-      opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
+      opts.servicePath ||
+      opts.apiEndpoint ||
+      this.constructor.servicePath;
 
     // Ensure that options include the service address and port.
     opts = Object.assign(
@@ -110,23 +112,17 @@ class StreamingVideoIntelligenceServiceClient {
     // For Node.js, pass the path to JSON proto file.
     // For browsers, pass the JSON content.
 
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
+    const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
     const protos = gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback ?
+        require("../../protos/protos.json") :
+        nodejsProtoPath
     );
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this._descriptors.stream = {
-      streamingAnnotateVideo: new gaxModule.StreamDescriptor(
-        gax.StreamType.BIDI_STREAMING
-      ),
+      streamingAnnotateVideo: new gaxModule.StreamDescriptor(gax.StreamType.BIDI_STREAMING),
     };
 
     // Put together the default options sent with requests.
@@ -145,12 +141,9 @@ class StreamingVideoIntelligenceServiceClient {
     // Put together the "service stub" for
     // google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService.
     const streamingVideoIntelligenceServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? protos.lookupService(
-            'google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService'
-          )
-        : protos.google.cloud.videointelligence.v1p3beta1
-            .StreamingVideoIntelligenceService,
+      opts.fallback ?
+        protos.lookupService('google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService') :
+        protos.google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService,
       opts
     );
 
@@ -203,7 +196,9 @@ class StreamingVideoIntelligenceServiceClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+    ];
   }
 
   /**
@@ -253,5 +248,6 @@ class StreamingVideoIntelligenceServiceClient {
     return this._innerApiCalls.streamingAnnotateVideo(options);
   }
 }
+
 
 module.exports = StreamingVideoIntelligenceServiceClient;

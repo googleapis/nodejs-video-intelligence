@@ -69,7 +69,9 @@ class VideoIntelligenceServiceClient {
     const gaxModule = !global.isBrowser && opts.fallback ? gax.fallback : gax;
 
     const servicePath =
-      opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
+      opts.servicePath ||
+      opts.apiEndpoint ||
+      this.constructor.servicePath;
 
     // Ensure that options include the service address and port.
     opts = Object.assign(
@@ -110,20 +112,16 @@ class VideoIntelligenceServiceClient {
     // For Node.js, pass the path to JSON proto file.
     // For browsers, pass the JSON content.
 
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
+    const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
     const protos = gaxGrpc.loadProto(
-      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
+      opts.fallback ?
+        require("../../protos/protos.json") :
+        nodejsProtoPath
     );
 
-    const protoFilesRoot = opts.fallback
-      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
-      : gaxModule.protobuf.loadSync(nodejsProtoPath);
+    const protoFilesRoot = opts.fallback ?
+      gaxModule.protobuf.Root.fromJSON(require("../../protos/protos.json")) :
+      gaxModule.protobuf.loadSync(nodejsProtoPath);
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -164,18 +162,17 @@ class VideoIntelligenceServiceClient {
     // Put together the "service stub" for
     // google.cloud.videointelligence.v1p1beta1.VideoIntelligenceService.
     const videoIntelligenceServiceStub = gaxGrpc.createStub(
-      opts.fallback
-        ? protos.lookupService(
-            'google.cloud.videointelligence.v1p1beta1.VideoIntelligenceService'
-          )
-        : protos.google.cloud.videointelligence.v1p1beta1
-            .VideoIntelligenceService,
+      opts.fallback ?
+        protos.lookupService('google.cloud.videointelligence.v1p1beta1.VideoIntelligenceService') :
+        protos.google.cloud.videointelligence.v1p1beta1.VideoIntelligenceService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const videoIntelligenceServiceStubMethods = ['annotateVideo'];
+    const videoIntelligenceServiceStubMethods = [
+      'annotateVideo',
+    ];
     for (const methodName of videoIntelligenceServiceStubMethods) {
       const innerCallPromise = videoIntelligenceServiceStub.then(
         stub => (...args) => {
@@ -220,7 +217,9 @@ class VideoIntelligenceServiceClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+    ];
   }
 
   /**
@@ -380,5 +379,6 @@ class VideoIntelligenceServiceClient {
     return this._innerApiCalls.annotateVideo(request, options, callback);
   }
 }
+
 
 module.exports = VideoIntelligenceServiceClient;
