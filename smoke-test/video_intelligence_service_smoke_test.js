@@ -14,6 +14,8 @@
 
 'use strict';
 
+const {describe, it} = require('mocha');
+
 describe('VideoIntelligenceServiceSmokeTest', () => {
   LongRunningOptionalArrayMethod$;
 });
