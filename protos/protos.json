@@ -1157,13 +1157,20 @@
                   },
                   "nested": {
                     "VideoIntelligenceService": {
+                      "options": {
+                        "(google.api.default_host)": "videointelligence.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "AnnotateVideo": {
                           "requestType": "AnnotateVideoRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v1p1beta1/videos:annotate",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "input_uri,features",
+                            "(google.longrunning.operation_info).response_type": "AnnotateVideoResponse",
+                            "(google.longrunning.operation_info).metadata_type": "AnnotateVideoProgress"
                           }
                         }
                       }
@@ -1181,7 +1188,10 @@
                         "features": {
                           "rule": "repeated",
                           "type": "Feature",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "videoContext": {
                           "type": "VideoContext",
@@ -1189,11 +1199,17 @@
                         },
                         "outputUri": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "locationId": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1433,29 +1449,47 @@
                       "fields": {
                         "languageCode": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "maxAlternatives": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "filterProfanity": {
                           "type": "bool",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "speechContexts": {
                           "rule": "repeated",
                           "type": "SpeechContext",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enableAutomaticPunctuation": {
                           "type": "bool",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "audioTracks": {
                           "rule": "repeated",
                           "type": "int32",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1464,7 +1498,10 @@
                         "phrases": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1485,7 +1522,10 @@
                         },
                         "confidence": {
                           "type": "float",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "words": {
                           "rule": "repeated",
