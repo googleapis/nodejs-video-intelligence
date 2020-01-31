@@ -53,11 +53,11 @@ async function analyzeTextGCS(gcsUri) {
       }
       console.log(
         `\tStart: ${time.startTimeOffset.seconds}` +
-          `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
       console.log(
         `\tEnd: ${time.endTimeOffset.seconds}.` +
-          `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
       console.log(`\tConfidence: ${segment.confidence}`);
       segment.frames.forEach(frame => {
@@ -70,7 +70,7 @@ async function analyzeTextGCS(gcsUri) {
         }
         console.log(
           `Time offset for the frame: ${timeOffset.seconds}` +
-            `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
+          `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
         );
         console.log(`Rotated Bounding Box Vertices:`);
         frame.rotatedBoundingBox.vertices.forEach(vertex => {
@@ -126,10 +126,10 @@ async function analyzeObjectTrackingGCS(gcsUri) {
     }
     console.log(
       `Segment: ${time.startTimeOffset.seconds}` +
-        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${
-          time.endTimeOffset.seconds
-        }.` +
-        `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+      `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${
+      time.endTimeOffset.seconds
+      }.` +
+      `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
     );
     console.log(`Confidence: ${object.confidence}`);
     const frame = object.frames[0];
@@ -143,7 +143,7 @@ async function analyzeObjectTrackingGCS(gcsUri) {
     }
     console.log(
       `Time offset for the first frame: ${timeOffset.seconds}` +
-        `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
+      `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
     );
     console.log(`Bounding box position:`);
     console.log(`\tleft   :${box.left}`);
@@ -200,11 +200,11 @@ async function analyzeText(path) {
       }
       console.log(
         `\tStart: ${time.startTimeOffset.seconds}` +
-          `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
       console.log(
         `\tEnd: ${time.endTimeOffset.seconds}.` +
-          `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
       console.log(`\tConfidence: ${segment.confidence}`);
       segment.frames.forEach(frame => {
@@ -217,7 +217,7 @@ async function analyzeText(path) {
         }
         console.log(
           `Time offset for the frame: ${timeOffset.seconds}` +
-            `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
+          `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
         );
         console.log(`Rotated Bounding Box Vertices:`);
         frame.rotatedBoundingBox.vertices.forEach(vertex => {
@@ -276,10 +276,10 @@ async function analyzeObjectTracking(path) {
     }
     console.log(
       `Segment: ${time.startTimeOffset.seconds}` +
-        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${
-          time.endTimeOffset.seconds
-        }.` +
-        `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+      `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${
+      time.endTimeOffset.seconds
+      }.` +
+      `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
     );
     console.log(`Confidence: ${object.confidence}`);
     const frame = object.frames[0];
@@ -293,7 +293,7 @@ async function analyzeObjectTracking(path) {
     }
     console.log(
       `Time offset for the first frame: ${timeOffset.seconds}` +
-        `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
+      `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
     );
     console.log(`Bounding box position:`);
     console.log(`\tleft   :${box.left}`);
@@ -302,6 +302,12 @@ async function analyzeObjectTracking(path) {
     console.log(`\tbottom :${box.bottom}`);
   });
   // [END video_object_tracking_beta]
+}
+async function analyzePersonGCS(gcsUri) {
+
+}
+async function analyzeFaceGCS(gcsUri) {
+
 }
 
 async function main() {
@@ -330,6 +336,18 @@ async function main() {
       `Analyzes objects in a video stored in a local file using the Cloud Video Intelligence API.`,
       {},
       opts => analyzeObjectTracking(opts.path)
+    )
+    .command(
+      `detect-person <gcsUri>`,
+      `Detects people in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
+      {},
+      opts => analyzePersonGCS(opts.gcsUri)
+    )
+    .command(
+      `detect-face <gcsUri>`,
+      `Detects a person's face in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
+      {},
+      opts => analyzePersonGCS(opts.gcsUri)
     )
     .example(`node $0 video-text ./resources/googlework_short.mp4`)
     .example(
