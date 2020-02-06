@@ -296,8 +296,8 @@ async function detectFacesGCS(gcsUri) {
         segment.endTimeOffset.nanos = 0;
       }
       console.log(
-        `\tStart: ${segment.startTimeOffset.seconds}` +
-          `.${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `\tStart: ${segment.startTimeOffset.seconds}.` +
+          `${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
       console.log(
         `\tEnd: ${segment.endTimeOffset.seconds}.` +
