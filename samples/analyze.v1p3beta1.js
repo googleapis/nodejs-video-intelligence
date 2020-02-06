@@ -29,7 +29,7 @@ async function detectPerson(path) {
   // const path = 'Local file to analyze, e.g. ./my-file.mp4';
 
   // Reads a local video file and converts it to base64
-  const file = await util.promisify(fs.readFile)(path);
+  const file = fs.readFileSync(path);
   const inputContent = file.toString('base64');
 
   const request = {
@@ -53,54 +53,47 @@ async function detectPerson(path) {
   const personAnnotations =
     results[0].annotationResults[0].personDetectionAnnotations;
 
-  personAnnotations.forEach(personAnnotation => {
+  for (const {tracks} of personAnnotations) {
     console.log('Person detected:');
-    const tracks = personAnnotation.tracks;
-    tracks.forEach(track => {
-      const time = track.segment;
-      if (time.startTimeOffset.seconds === undefined) {
-        time.startTimeOffset.seconds = 0;
+    for (const {segment, timestampedObjects} of tracks) {
+      if (segment.startTimeOffset.seconds === undefined) {
+        segment.startTimeOffset.seconds = 0;
       }
-      if (time.startTimeOffset.nanos === undefined) {
-        time.startTimeOffset.nanos = 0;
+      if (segment.startTimeOffset.nanos === undefined) {
+        segment.startTimeOffset.nanos = 0;
       }
-      if (time.endTimeOffset.seconds === undefined) {
-        time.endTimeOffset.seconds = 0;
+      if (segment.endTimeOffset.seconds === undefined) {
+        segment.endTimeOffset.seconds = 0;
       }
-      if (time.endTimeOffset.nanos === undefined) {
-        time.endTimeOffset.nanos = 0;
+      if (segment.endTimeOffset.nanos === undefined) {
+        segment.endTimeOffset.nanos = 0;
       }
       console.log(
-        `\tStart: ${time.startTimeOffset.seconds}` +
-        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `\tStart: ${segment.startTimeOffset.seconds}.` +
+          `${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
       console.log(
-        `\tEnd: ${time.endTimeOffset.seconds}.` +
-        `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `\tEnd: ${segment.endTimeOffset.seconds}.` +
+          `${(segment.endTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
 
       // Each segment includes timestamped objects that
       // include characteristic--e.g. clothes, posture
       // of the person detected.
-      const [firstTimestampedObject] = track.timestampedObjects;
+      const [firstTimestampedObject] = timestampedObjects;
 
       // Attributes include unique pieces of clothing,
       // poses, or hair color.
-      firstTimestampedObject.attributes.forEach(attribute => {
-        console.log(
-          `\tAttribute: ${attribute.name}; ` + `Value: ${attribute.value}`
-        );
-      });
-      // Landmarks in person detection include body parts.
-      firstTimestampedObject.landmarks.forEach(landmark => {
-        console.log(
-          `\tLandmark: ${landmark.name}; ` +
-          `Vertex: ${landmark.point.x}, ${landmark.point.y}`
-        );
-      });
-    });
-  });
+      for (const {name, value} of firstTimestampedObject.attributes) {
+        console.log(`\tAttribute: ${name}; ` + `Value: ${value}`);
+      }
 
+      // Landmarks in person detection include body parts.
+      for (const {name, point} of firstTimestampedObject.landmarks) {
+        console.log(`\tLandmark: ${name}; Vertex: ${point.x}, ${point.y}`);
+      }
+    }
+  }
   // [END video_detect_person_beta]
 }
 async function detectPersonGCS(gcsUri) {
@@ -136,54 +129,48 @@ async function detectPersonGCS(gcsUri) {
   const personAnnotations =
     results[0].annotationResults[0].personDetectionAnnotations;
 
-  personAnnotations.forEach(personAnnotation => {
+  for (const {tracks} of personAnnotations) {
     console.log('Person detected:');
-    const tracks = personAnnotation.tracks;
-    tracks.forEach(track => {
-      const time = track.segment;
-      if (time.startTimeOffset.seconds === undefined) {
-        time.startTimeOffset.seconds = 0;
+
+    for (const {segment, timestampedObjects} of tracks) {
+      if (segment.startTimeOffset.seconds === undefined) {
+        segment.startTimeOffset.seconds = 0;
       }
-      if (time.startTimeOffset.nanos === undefined) {
-        time.startTimeOffset.nanos = 0;
+      if (segment.startTimeOffset.nanos === undefined) {
+        segment.startTimeOffset.nanos = 0;
       }
-      if (time.endTimeOffset.seconds === undefined) {
-        time.endTimeOffset.seconds = 0;
+      if (segment.endTimeOffset.seconds === undefined) {
+        segment.endTimeOffset.seconds = 0;
       }
-      if (time.endTimeOffset.nanos === undefined) {
-        time.endTimeOffset.nanos = 0;
+      if (segment.endTimeOffset.nanos === undefined) {
+        segment.endTimeOffset.nanos = 0;
       }
       console.log(
-        `\tStart: ${time.startTimeOffset.seconds}` +
-        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `\tStart: ${segment.startTimeOffset.seconds}` +
+          `.${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
       console.log(
-        `\tEnd: ${time.endTimeOffset.seconds}.` +
-        `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `\tEnd: ${segment.endTimeOffset.seconds}.` +
+          `${(segment.endTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
 
       // Each segment includes timestamped objects that
       // include characteristic--e.g. clothes, posture
       // of the person detected.
-      const [firstTimestampedObject] = track.timestampedObjects;
+      const [firstTimestampedObject] = timestampedObjects;
 
       // Attributes include unique pieces of clothing,
       // poses, or hair color.
-      firstTimestampedObject.attributes.forEach(attribute => {
-        console.log(
-          `\tAttribute: ${attribute.name}; ` + `Value: ${attribute.value}`
-        );
-      });
-      // Landmarks in person detection include body parts.
-      firstTimestampedObject.landmarks.forEach(landmark => {
-        console.log(
-          `\tLandmark: ${landmark.name}; ` +
-          `Vertex: ${landmark.point.x}, ${landmark.point.y}`
-        );
-      });
-    });
-  });
+      for (const {name, value} of firstTimestampedObject.attributes) {
+        console.log(`\tAttribute: ${name}; ` + `Value: ${value}`);
+      }
 
+      // Landmarks in person detection include body parts.
+      for (const {name, point} of firstTimestampedObject.landmarks) {
+        console.log(`\tLandmark: ${name}; Vertex: ${point.x}, ${point.y}`);
+      }
+    }
+  }
   // [END video_detect_person_beta]
 }
 async function detectFaces(path) {
@@ -201,7 +188,7 @@ async function detectFaces(path) {
   // const path = 'Local file to analyze, e.g. ./my-file.mp4';
 
   // Reads a local video file and converts it to base64
-  const file = await util.promisify(fs.readFile)(path);
+  const file = fs.readFileSync(path);
   const inputContent = file.toString('base64');
 
   const request = {
@@ -224,43 +211,41 @@ async function detectFaces(path) {
   const faceAnnotations =
     results[0].annotationResults[0].faceDetectionAnnotations;
 
-  faceAnnotations.forEach(faceAnnotation => {
+  for (const {tracks} of faceAnnotations) {
     console.log('Face detected:');
-    const tracks = faceAnnotation.tracks;
-    tracks.forEach(track => {
-      const time = track.segment;
-      if (time.startTimeOffset.seconds === undefined) {
-        time.startTimeOffset.seconds = 0;
+    for (const {segment, timestampedObjects} of tracks) {
+      if (segment.startTimeOffset.seconds === undefined) {
+        segment.startTimeOffset.seconds = 0;
       }
-      if (time.startTimeOffset.nanos === undefined) {
-        time.startTimeOffset.nanos = 0;
+      if (segment.startTimeOffset.nanos === undefined) {
+        segment.startTimeOffset.nanos = 0;
       }
-      if (time.endTimeOffset.seconds === undefined) {
-        time.endTimeOffset.seconds = 0;
+      if (segment.endTimeOffset.seconds === undefined) {
+        segment.endTimeOffset.seconds = 0;
       }
-      if (time.endTimeOffset.nanos === undefined) {
-        time.endTimeOffset.nanos = 0;
+      if (segment.endTimeOffset.nanos === undefined) {
+        segment.endTimeOffset.nanos = 0;
       }
       console.log(
-        `\tStart: ${time.startTimeOffset.seconds}` +
-        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `\tStart: ${segment.startTimeOffset.seconds}` +
+          `.${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
       console.log(
-        `\tEnd: ${time.endTimeOffset.seconds}.` +
-        `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `\tEnd: ${segment.endTimeOffset.seconds}.` +
+          `${(segment.endTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
 
       // Each segment includes timestamped objects that
       // include characteristics of the face detected.
-      const [firstTimestapedObject] = track.timestampedObjects;
+      const [firstTimestapedObject] = timestampedObjects;
 
-      firstTimestapedObject.attributes.forEach(attribute => {
+      for (const {name} of firstTimestapedObject.attributes) {
         // Attributes include unique pieces of clothing, like glasses,
         // poses, or hair color.
-        console.log(`\tAttribute: ${attribute.name}; `);
-      });
-    });
-  });
+        console.log(`\tAttribute: ${name}; `);
+      }
+    }
+  }
 }
 async function detectFacesGCS(gcsUri) {
   //[START video_detect_faces_gcs_beta]
@@ -294,43 +279,42 @@ async function detectFacesGCS(gcsUri) {
   const faceAnnotations =
     results[0].annotationResults[0].faceDetectionAnnotations;
 
-  faceAnnotations.forEach(faceAnnotation => {
+  for (const {tracks} of faceAnnotations) {
     console.log('Face detected:');
-    const tracks = faceAnnotation.tracks;
-    tracks.forEach(track => {
-      const time = track.segment;
-      if (time.startTimeOffset.seconds === undefined) {
-        time.startTimeOffset.seconds = 0;
+
+    for (const {segment, timestampedObjects} of tracks) {
+      if (segment.startTimeOffset.seconds === undefined) {
+        segment.startTimeOffset.seconds = 0;
       }
-      if (time.startTimeOffset.nanos === undefined) {
-        time.startTimeOffset.nanos = 0;
+      if (segment.startTimeOffset.nanos === undefined) {
+        segment.startTimeOffset.nanos = 0;
       }
-      if (time.endTimeOffset.seconds === undefined) {
-        time.endTimeOffset.seconds = 0;
+      if (segment.endTimeOffset.seconds === undefined) {
+        segment.endTimeOffset.seconds = 0;
       }
-      if (time.endTimeOffset.nanos === undefined) {
-        time.endTimeOffset.nanos = 0;
+      if (segment.endTimeOffset.nanos === undefined) {
+        segment.endTimeOffset.nanos = 0;
       }
       console.log(
-        `\tStart: ${time.startTimeOffset.seconds}` +
-        `.${(time.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `\tStart: ${segment.startTimeOffset.seconds}` +
+          `.${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
       console.log(
-        `\tEnd: ${time.endTimeOffset.seconds}.` +
-        `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+        `\tEnd: ${segment.endTimeOffset.seconds}.` +
+          `${(segment.endTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
 
       // Each segment includes timestamped objects that
       // include characteristics of the face detected.
-      const [firstTimestapedObject] = track.timestampedObjects;
+      const [firstTimestapedObject] = timestampedObjects;
 
-      firstTimestapedObject.attributes.forEach(attribute => {
+      for (const {name} of firstTimestapedObject.attributes) {
         // Attributes include unique pieces of clothing, like glasses,
         // poses, or hair color.
-        console.log(`\tAttribute: ${attribute.name}; `);
-      });
-    });
-  });
+        console.log(`\tAttribute: ${name}; `);
+      }
+    }
+  }
 }
 
 async function main() {
