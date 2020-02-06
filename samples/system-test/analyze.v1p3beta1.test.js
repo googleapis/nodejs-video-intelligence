@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
 
 'use strict';
 
-const {assert} = require('chai');
-const {describe, it} = require('mocha');
+const { assert } = require('chai');
+const { describe, it } = require('mocha');
 const cp = require('child_process');
 
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, { encoding: 'utf-8' });
 
 const cmd = 'node analyze.v1p3beta1.js';
 const url = 'gs://cloud-samples-data/video/googlework_short.mp4';
