@@ -19,7 +19,6 @@ async function detectPerson(path) {
   // Imports the Google Cloud Video Intelligence library + Node's fs library
   const Video = require('@google-cloud/video-intelligence').v1p3beta1;
   const fs = require('fs');
-  const util = require('util');
   // Creates a client
   const video = new Video.VideoIntelligenceServiceClient();
 
@@ -178,7 +177,6 @@ async function detectFaces(path) {
   // Imports the Google Cloud Video Intelligence library + Node's fs library
   const Video = require('@google-cloud/video-intelligence').v1p3beta1;
   const fs = require('fs');
-  const util = require('util');
   // Creates a client
   const video = new Video.VideoIntelligenceServiceClient();
 
