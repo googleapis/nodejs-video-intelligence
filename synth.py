@@ -26,7 +26,6 @@ for version in versions:
     s.copy(library, excludes=["package.json", "README.md", "src/index.ts",
                               "smoke-test/video_intelligence_service_smoke_test.ts"])
 
-common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
