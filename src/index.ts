@@ -22,6 +22,8 @@ import * as v1p1beta1 from './v1p1beta1';
 import * as v1p2beta1 from './v1p2beta1';
 import * as v1p3beta1 from './v1p3beta1';
 const VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
+const StreamingVideoIntelligenceServiceClient =
+  v1p3beta1.StreamingVideoIntelligenceServiceClient;
 export {
   v1,
   v1beta2,
@@ -29,6 +31,7 @@ export {
   v1p2beta1,
   v1p3beta1,
   VideoIntelligenceServiceClient,
+  StreamingVideoIntelligenceServiceClient,
 };
 // For compatibility with JavaScript libraries we need to provide this default export:
 // tslint:disable-next-line no-default-export
@@ -39,4 +42,5 @@ export default {
   v1p2beta1,
   v1p3beta1,
   VideoIntelligenceServiceClient,
+  StreamingVideoIntelligenceServiceClient,
 };

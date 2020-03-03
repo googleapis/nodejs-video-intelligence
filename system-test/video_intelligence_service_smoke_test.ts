@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import {describe, it} from 'mocha';
-import {promises} from 'dns';
 import {Operation} from 'google-gax';
 
 describe('VideoIntelligenceServiceSmokeTest', () => {
