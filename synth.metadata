@@ -1,33 +1,12 @@
 {
-  "updateTime": "2020-02-13T20:34:22.826443Z",
+  "updateTime": "2020-03-03T08:21:55.590244Z",
   "sources": [
-    {
-      "git": {
-        "name": ".",
-        "remote": "https://github.com/googleapis/nodejs-video-intelligence.git",
-        "sha": "eb9b400c24bdf306d8263ec402922b3235754034"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "f320a85654b7c8eedcce5f66e7ccc4fbf8fae6ac"
-      }
-    },
-    {
-      "generator": {
-        "name": "artman",
-        "version": "0.45.0",
-        "dockerImage": "googleapis/artman@sha256:6aec9c34db0e4be221cdaf6faba27bdc07cfea846808b3d3b964dfce3a9a0f9b"
-      }
-    },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "56b55aa8818cd0a532a7d779f6ef337ba809ccbd",
-        "internalRef": "294931650"
+        "sha": "4a180bfff8a21645b3a935c2756e8d6ab18a74e0",
+        "internalRef": "298484782"
       }
     },
     {
@@ -44,9 +23,8 @@
         "source": "googleapis",
         "apiName": "video-intelligence",
         "apiVersion": "v1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/videointelligence/artman_videointelligence_v1.yaml"
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     },
     {
@@ -54,9 +32,8 @@
         "source": "googleapis",
         "apiName": "video-intelligence",
         "apiVersion": "v1beta2",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/videointelligence/artman_videointelligence_v1beta2.yaml"
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     },
     {
@@ -64,9 +41,8 @@
         "source": "googleapis",
         "apiName": "video-intelligence",
         "apiVersion": "v1p1beta1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/videointelligence/artman_videointelligence_v1p1beta1.yaml"
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     },
     {
@@ -74,9 +50,8 @@
         "source": "googleapis",
         "apiName": "video-intelligence",
         "apiVersion": "v1p2beta1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/videointelligence/artman_videointelligence_v1p2beta1.yaml"
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     },
     {
@@ -84,9 +59,8 @@
         "source": "googleapis",
         "apiName": "video-intelligence",
         "apiVersion": "v1p3beta1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/videointelligence/artman_videointelligence_v1p3beta1.yaml"
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     }
   ]

@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
-
-const {describe, it} = require('mocha');
+import {describe, it} from 'mocha';
+import {promises} from 'dns';
+import {Operation} from 'google-gax';
 
 describe('VideoIntelligenceServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
@@ -30,14 +30,14 @@ describe('VideoIntelligenceServiceSmokeTest', () => {
     const featuresElement = 'LABEL_DETECTION';
     const features = [featuresElement];
     const request = {
-      inputUri: inputUri,
-      features: features,
+      inputUri,
+      features,
     };
 
     // Handle the operation using the promise pattern.
     client
       .annotateVideo(request)
-      .then(responses => {
+      .then((responses: Operation[]) => {
         const operation = responses[0];
         const initialApiResponse = responses[1];
         console.log(operation);
@@ -46,7 +46,7 @@ describe('VideoIntelligenceServiceSmokeTest', () => {
         // Operation#promise starts polling for the completion of the LRO.
         return operation.promise();
       })
-      .then(responses => {
+      .then((responses: Operation[]) => {
         // The final result of the operation.
         const result = responses[0];
 
@@ -77,25 +77,25 @@ describe('VideoIntelligenceServiceSmokeTest', () => {
     const featuresElement = 'LABEL_DETECTION';
     const features = [featuresElement];
     const request = {
-      inputUri: inputUri,
-      features: features,
+      inputUri,
+      features,
     };
 
     // Handle the operation using the event emitter pattern.
     client
       .annotateVideo(request)
-      .then(responses => {
+      .then((responses: Operation[]) => {
         const operation = responses[0];
 
         // Adding a listener for the "complete" event starts polling for the
         // completion of the operation.
-        operation.on('complete', result => {
+        operation.on('complete', (result: string) => {
           console.log(result);
         });
 
         // Adding a listener for the "progress" event causes the callback to be
         // called on any change in metadata when the operation is polled.
-        operation.on('progress', metadata => {
+        operation.on('progress', (metadata: string) => {
           console.log(metadata);
         });
 

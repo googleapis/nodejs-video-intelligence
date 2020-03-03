@@ -18,7 +18,7 @@
 
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
-import { describe, it } from 'mocha';
+import {describe, it} from 'mocha';
 const videointelligenceserviceModule = require('../src');
 
 const FAKE_STATUS_CODE = 1;
@@ -97,7 +97,7 @@ describe('v1.VideoIntelligenceServiceClient', () => {
     it('invokes annotateVideo without error', done => {
       const client = new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         }
       );
@@ -128,7 +128,7 @@ describe('v1.VideoIntelligenceServiceClient', () => {
     it('invokes annotateVideo with error', done => {
       const client = new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         }
       );

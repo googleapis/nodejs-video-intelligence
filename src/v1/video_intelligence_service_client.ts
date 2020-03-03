@@ -38,12 +38,12 @@ const version = require('../../../package.json').version;
  * @memberof v1
  */
 export class VideoIntelligenceServiceClient {
-  private _descriptors: Descriptors = { page: {}, stream: {}, longrunning: {} };
-  private _innerApiCalls: { [name: string]: Function };
+  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
+  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   auth: gax.GoogleAuth;
   operationsClient: gax.OperationsClient;
-  videoIntelligenceServiceStub: Promise<{ [name: string]: Function }>;
+  videoIntelligenceServiceStub: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of VideoIntelligenceServiceClient.
@@ -86,7 +86,7 @@ export class VideoIntelligenceServiceClient {
     const port = opts && opts.port ? opts.port : staticMembers.port;
 
     if (!opts) {
-      opts = { servicePath, port };
+      opts = {servicePath, port};
     }
     opts.servicePath = opts.servicePath || servicePath;
     opts.port = opts.port || port;
@@ -171,7 +171,7 @@ export class VideoIntelligenceServiceClient {
       'google.cloud.videointelligence.v1.VideoIntelligenceService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') }
+      {'x-goog-api-client': clientHeader.join(' ')}
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -190,7 +190,7 @@ export class VideoIntelligenceServiceClient {
           (protos as any).google.cloud.videointelligence.v1
             .VideoIntelligenceService,
       opts
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.

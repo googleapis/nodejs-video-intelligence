@@ -16,9 +16,9 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { packNTest } from 'pack-n-play';
-import { readFileSync } from 'fs';
-import { describe, it } from 'mocha';
+import {packNTest} from 'pack-n-play';
+import {readFileSync} from 'fs';
+import {describe, it} from 'mocha';
 
 describe('typescript consumer tests', () => {
   it('should have correct type signature for typescript users', async function() {

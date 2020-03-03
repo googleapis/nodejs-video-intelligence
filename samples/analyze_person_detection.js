@@ -26,7 +26,6 @@ function main(path = 'YOUR_LOCAL_FILE') {
   const fs = require('fs');
   // Creates a client
   const video = new Video.VideoIntelligenceServiceClient();
-
   /**
    * TODO(developer): Uncomment the following line before running the sample.
    */
