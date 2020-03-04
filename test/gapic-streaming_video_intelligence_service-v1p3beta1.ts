@@ -104,7 +104,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
         }
       );
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.videointelligence.v1p3beta1.IStreamingAnnotateVideoRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -132,7 +132,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
         }
       );
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.videointelligence.v1p3beta1.IStreamingAnnotateVideoRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
