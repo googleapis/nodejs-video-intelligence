@@ -43,14 +43,12 @@
     "prepare": "npm run compile"
   },
   "dependencies": {
-    "google-gax": "^1.14.2",
-    "protobufjs": "^6.8.8"
+    "google-gax": "^1.14.2"
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.29",
     "c8": "^7.0.0",
-    "codecov": "^3.4.0",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-node": "^11.0.0",
