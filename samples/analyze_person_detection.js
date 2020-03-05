@@ -59,15 +59,10 @@ function main(path = 'YOUR_LOCAL_FILE') {
     const personAnnotations =
       results[0].annotationResults[0].personDetectionAnnotations;
 
-    for (const {
-        tracks
-      } of personAnnotations) {
+    for (const {tracks} of personAnnotations) {
       console.log('Person detected:');
 
-      for (const {
-          segment,
-          timestampedObjects
-        } of tracks) {
+      for (const {segment, timestampedObjects} of tracks) {
         if (segment.startTimeOffset.seconds === undefined) {
           segment.startTimeOffset.seconds = 0;
         }
@@ -82,11 +77,11 @@ function main(path = 'YOUR_LOCAL_FILE') {
         }
         console.log(
           `\tStart: ${segment.startTimeOffset.seconds}` +
-          `.${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+            `.${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
         );
         console.log(
           `\tEnd: ${segment.endTimeOffset.seconds}.` +
-          `${(segment.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+            `${(segment.endTimeOffset.nanos / 1e6).toFixed(0)}s`
         );
 
         // Each segment includes timestamped objects that
@@ -96,18 +91,12 @@ function main(path = 'YOUR_LOCAL_FILE') {
 
         // Attributes include unique pieces of clothing,
         // poses, or hair color.
-        for (const {
-            name,
-            value
-          } of firstTimestampedObject.attributes) {
+        for (const {name, value} of firstTimestampedObject.attributes) {
           console.log(`\tAttribute: ${name}; Value: ${value}`);
         }
 
         // Landmarks in person detection include body parts.
-        for (const {
-            name,
-            point
-          } of firstTimestampedObject.landmarks) {
+        for (const {name, point} of firstTimestampedObject.landmarks) {
           console.log(`\tLandmark: ${name}; Vertex: ${point.x}, ${point.y}`);
         }
       }
