@@ -31,7 +31,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts fix && eslint --fix samples/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
-    "system-test": "c8 mocha build/system-test",
+    "system-test": "c8 mocha build/system-test --timeout 600000",
     "test": "c8 mocha build/test",
     "fix": "eslint --fix '**/*.js'",
     "docs-test": "linkinator docs",
