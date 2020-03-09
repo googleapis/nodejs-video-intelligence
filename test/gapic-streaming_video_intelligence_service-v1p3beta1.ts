@@ -95,6 +95,26 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
     );
     assert(client);
   });
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.streamingVideoIntelligenceServiceStub, undefined);
+    await client.initialize();
+    assert(client.streamingVideoIntelligenceServiceStub);
+  });
+  it('has close method', () => {
+    const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
   describe('streamingAnnotateVideo', () => {
     it('invokes streamingAnnotateVideo without error', done => {
       const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
@@ -103,6 +123,8 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.videointelligence.v1p3beta1.IStreamingAnnotateVideoRequest = {};
       // Mock response
@@ -131,6 +153,8 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      // Initialize client before mocking
+      client.initialize();
       // Mock request
       const request: protosTypes.google.cloud.videointelligence.v1p3beta1.IStreamingAnnotateVideoRequest = {};
       // Mock response
