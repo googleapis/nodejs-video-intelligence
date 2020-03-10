@@ -23,11 +23,11 @@ function main(inputUri = 'gs://cloud-samples-data/video/googlework_short.mp4') {
 
   // Imports the Google Cloud client libraries
   const {
-    VideoIntelligenceClient,
+    Video,
   } = require('@google-cloud/video-intelligence').v1p3beta1;
 
   // Instantiates a client
-  const client = new VideoIntelligenceClient();
+  const client = new Video.VideoIntelligenceServiceClient();
 
   // Performs asynchronous video annotation for logo recognition on a file hosted in GCS.
   async function detectLogoGcs() {

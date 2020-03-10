@@ -23,12 +23,12 @@ function main(localFilePath = 'path/to/your/video.mp4') {
 
   // Imports the Google Cloud client libraries
   const {
-    VideoIntelligenceClient,
+    Video,
   } = require('@google-cloud/video-intelligence').v1p3beta1;
   const fs = require('fs');
 
   // Instantiates a client
-  const client = new VideoIntelligenceClient();
+  const client = new Video.VideoIntelligenceServiceClient();
 
   // Performs asynchronous video annotation for logo recognition on a file.
   async function detectLogo() {
