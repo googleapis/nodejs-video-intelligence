@@ -22,7 +22,7 @@ function main(localFilePath = 'path/to/your/video.mp4') {
   // const localFilePath = 'path/to/your/video.mp4'
 
   // Imports the Google Cloud client libraries
-  const Video = require('@google-cloud/video-intelligence').v1p3beta1;
+  const Video = require('@google-cloud/video-intelligence');
   const fs = require('fs');
 
   // Instantiates a client

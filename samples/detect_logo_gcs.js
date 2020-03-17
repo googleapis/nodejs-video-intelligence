@@ -13,7 +13,10 @@
 // limitations under the License.
 
 'use strict';
-
+/**
+ * Recognizes and annotates logos and brand marks in a video.
+ * @param {string} inputUri video file to annotate
+ */
 function main(inputUri = 'gs://cloud-samples-data/video/googlework_short.mp4') {
   // [START video_detect_logo_gcs_beta]
   /**
