@@ -25,7 +25,7 @@ function main(inputUri = 'gs://cloud-samples-data/video/googlework_short.mp4') {
   // const inputUri = 'gs://cloud-samples-data/video/googlework_short.mp4';
 
   // Imports the Google Cloud client libraries
-  const Video = require('@google-cloud/video-intelligence').v1p3beta1;
+  const Video = require('@google-cloud/video-intelligence');
 
   // Instantiates a client
   const client = new Video.VideoIntelligenceServiceClient();
