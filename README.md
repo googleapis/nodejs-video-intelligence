@@ -55,61 +55,61 @@ npm install @google-cloud/video-intelligence
 ### Using the client library
 
 ```javascript
-  // Imports the Google Cloud Video Intelligence library
-  const videoIntelligence = require('@google-cloud/video-intelligence');
+// Imports the Google Cloud Video Intelligence library
+const videoIntelligence = require('@google-cloud/video-intelligence');
 
-  // Creates a client
-  const client = new videoIntelligence.VideoIntelligenceServiceClient();
+// Creates a client
+const client = new videoIntelligence.VideoIntelligenceServiceClient();
 
-  // The GCS uri of the video to analyze
-  const gcsUri = 'gs://cloud-samples-data/video/cat.mp4';
+// The GCS uri of the video to analyze
+const gcsUri = 'gs://cloud-samples-data/video/cat.mp4';
 
-  // Construct request
-  const request = {
-    inputUri: gcsUri,
-    features: ['LABEL_DETECTION'],
-  };
+// Construct request
+const request = {
+  inputUri: gcsUri,
+  features: ['LABEL_DETECTION'],
+};
 
-  // Execute request
-  const [operation] = await client.annotateVideo(request);
+// Execute request
+const [operation] = await client.annotateVideo(request);
 
-  console.log(
-    'Waiting for operation to complete... (this may take a few minutes)'
-  );
+console.log(
+  'Waiting for operation to complete... (this may take a few minutes)'
+);
 
-  const [operationResult] = await operation.promise();
+const [operationResult] = await operation.promise();
 
-  // Gets annotations for video
-  const annotations = operationResult.annotationResults[0];
+// Gets annotations for video
+const annotations = operationResult.annotationResults[0];
 
-  // Gets labels for video from its annotations
-  const labels = annotations.segmentLabelAnnotations;
-  labels.forEach(label => {
-    console.log(`Label ${label.entity.description} occurs at:`);
-    label.segments.forEach(segment => {
-      segment = segment.segment;
-      if (segment.startTimeOffset.seconds === undefined) {
-        segment.startTimeOffset.seconds = 0;
-      }
-      if (segment.startTimeOffset.nanos === undefined) {
-        segment.startTimeOffset.nanos = 0;
-      }
-      if (segment.endTimeOffset.seconds === undefined) {
-        segment.endTimeOffset.seconds = 0;
-      }
-      if (segment.endTimeOffset.nanos === undefined) {
-        segment.endTimeOffset.nanos = 0;
-      }
-      console.log(
-        `\tStart: ${segment.startTimeOffset.seconds}` +
-          `.${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
-      );
-      console.log(
-        `\tEnd: ${segment.endTimeOffset.seconds}.` +
-          `${(segment.endTimeOffset.nanos / 1e6).toFixed(0)}s`
-      );
-    });
+// Gets labels for video from its annotations
+const labels = annotations.segmentLabelAnnotations;
+labels.forEach(label => {
+  console.log(`Label ${label.entity.description} occurs at:`);
+  label.segments.forEach(segment => {
+    segment = segment.segment;
+    if (segment.startTimeOffset.seconds === undefined) {
+      segment.startTimeOffset.seconds = 0;
+    }
+    if (segment.startTimeOffset.nanos === undefined) {
+      segment.startTimeOffset.nanos = 0;
+    }
+    if (segment.endTimeOffset.seconds === undefined) {
+      segment.endTimeOffset.seconds = 0;
+    }
+    if (segment.endTimeOffset.nanos === undefined) {
+      segment.endTimeOffset.nanos = 0;
+    }
+    console.log(
+      `\tStart: ${segment.startTimeOffset.seconds}` +
+        `.${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
+    );
+    console.log(
+      `\tEnd: ${segment.endTimeOffset.seconds}.` +
+        `${(segment.endTimeOffset.nanos / 1e6).toFixed(0)}s`
+    );
   });
+});
 
 ```
 
@@ -134,6 +134,8 @@ has instructions for running the samples.
 | Analyze_face_detection_gcs | [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze_face_detection_gcs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze_face_detection_gcs.js,samples/README.md) |
 | Analyze_person_detection | [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze_person_detection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze_person_detection.js,samples/README.md) |
 | Analyze_person_detection_gcs | [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze_person_detection_gcs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze_person_detection_gcs.js,samples/README.md) |
+| Detect_logo | [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/detect_logo.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/detect_logo.js,samples/README.md) |
+| Detect_logo_gcs | [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/detect_logo_gcs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/detect_logo_gcs.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
@@ -163,6 +165,12 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 ## Contributing
 
 Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-video-intelligence/blob/master/CONTRIBUTING.md).
+
+Please note that this `README.md`, the `samples/README.md`,
+and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
+are generated from a central template. To edit one of these files, make an edit
+to its template in this
+[directory](https://github.com/googleapis/synthtool/tree/master/synthtool/gcp/templates/node_library).
 
 ## License
 
