@@ -15,7 +15,7 @@
 'use strict';
 
 function main(localFilePath = 'path/to/your/video.mp4') {
-  // [START video_detect_logo_beta]
+  // [START video_detect_logo]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -102,7 +102,7 @@ function main(localFilePath = 'path/to/your/video.mp4') {
   }
 
   detectLogo();
-  // [END video_detect_logo_beta]
+  // [END video_detect_logo]
 }
 
 main(...process.argv.slice(2));

@@ -18,7 +18,7 @@
  * @param {string} inputUri video file to annotate
  */
 function main(inputUri = 'gs://cloud-samples-data/video/googlework_short.mp4') {
-  // [START video_detect_logo_gcs_beta]
+  // [START video_detect_logo_gcs]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -102,7 +102,7 @@ function main(inputUri = 'gs://cloud-samples-data/video/googlework_short.mp4') {
   }
 
   detectLogoGcs();
-  // [END video_detect_logo_gcs_beta]
+  // [END video_detect_logo_gcs]
 }
 
 main(...process.argv.slice(2));
