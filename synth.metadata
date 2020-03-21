@@ -1,5 +1,5 @@
 {
-  "updateTime": "2020-03-21T11:47:33.210386Z",
+  "updateTime": "2020-03-21T11:44:20.534197Z",
   "sources": [
     {
       "git": {
@@ -14,8 +14,8 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "c73d13fb3fc69bb749f2f8005ee0db043d5903d3",
-        "log": "c73d13fb3fc69bb749f2f8005ee0db043d5903d3\ndocs: slight tweak to wording of contributing blurb in README (#446)\n\n\n1326d00fa9e856aa6b244b6811404cf45b109119\nfix: joining / fails for string type (#448)\n\n\n439df27ccecd8eaf926a773d92d37d49e4b64c1c\nfix(java): fix snippet region tag (#447)\n\n\n"
+        "sha": "7e98e1609c91082f4eeb63b530c6468aefd18cfd",
+        "log": "7e98e1609c91082f4eeb63b530c6468aefd18cfd\nbuild: use checkout@v2, not v1, as this allows manual re-running of tests (#451)\n\nhttps://github.com/actions/checkout/issues/23\nbcad3e01b69851ad682a87f8202003a1683ad73a\nfix(snippets): trim leading whitespace when extracting snippets (#449)\n\n* fix(snippets): trim leading whitespace when extracting snippets\n\n* docs: add docstring for _trim_leading_whitespace\nc73d13fb3fc69bb749f2f8005ee0db043d5903d3\ndocs: slight tweak to wording of contributing blurb in README (#446)\n\n\n1326d00fa9e856aa6b244b6811404cf45b109119\nfix: joining / fails for string type (#448)\n\n\n439df27ccecd8eaf926a773d92d37d49e4b64c1c\nfix(java): fix snippet region tag (#447)\n\n\n"
       }
     }
   ],
