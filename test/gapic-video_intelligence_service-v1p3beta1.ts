@@ -19,6 +19,7 @@
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
 import { describe, it } from 'mocha';
+/* eslint-disable @typescript-eslint/no-var-requires */
 const videointelligenceserviceModule = require('../src');
 
 
@@ -137,8 +138,6 @@ describe('v1p3beta1.VideoIntelligenceServiceClient', () => {
             client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.videointelligence.v1p3beta1.IAnnotateVideoRequest = {};
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(
                 request,

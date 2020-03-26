@@ -136,6 +136,7 @@ export class VideoIntelligenceServiceClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const protoFilesRoot = opts.fallback?
+      /* eslint-disable @typescript-eslint/no-var-requires */
       this._gaxModule.protobuf.Root.fromJSON(require("../../protos/protos.json")) :
       this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
@@ -188,7 +189,7 @@ export class VideoIntelligenceServiceClient {
     this.videoIntelligenceServiceStub = this._gaxGrpc.createStub(
         this._opts.fallback ?
           (this._protos as protobuf.Root).lookupService('google.cloud.videointelligence.v1p3beta1.VideoIntelligenceService') :
-          // tslint:disable-next-line no-any
+          /* eslint-disable @typescript-eslint/no-explicit-any */
           (this._protos as any).google.cloud.videointelligence.v1p3beta1.VideoIntelligenceService,
         this._opts) as Promise<{[method: string]: Function}>;
 

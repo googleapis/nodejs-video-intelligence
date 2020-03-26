@@ -19,6 +19,7 @@
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
 import { describe, it } from 'mocha';
+/* eslint-disable @typescript-eslint/no-var-requires */
 const streamingvideointelligenceserviceModule = require('../src');
 
 import {PassThrough} from 'stream';
@@ -132,8 +133,6 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
             client.initialize();
             // Mock request
             const request: protosTypes.google.cloud.videointelligence.v1p3beta1.IStreamingAnnotateVideoRequest = {};
-            // Mock response
-            const expectedResponse = {};
             // Mock gRPC layer
             client._innerApiCalls.streamingAnnotateVideo = mockBidiStreamingGrpcMethod(request, null, error);
             const stream = client.streamingAnnotateVideo().on('data', () =>{

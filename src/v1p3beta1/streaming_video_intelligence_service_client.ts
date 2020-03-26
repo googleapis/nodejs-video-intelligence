@@ -170,7 +170,7 @@ export class StreamingVideoIntelligenceServiceClient {
     this.streamingVideoIntelligenceServiceStub = this._gaxGrpc.createStub(
         this._opts.fallback ?
           (this._protos as protobuf.Root).lookupService('google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService') :
-          // tslint:disable-next-line no-any
+          /* eslint-disable @typescript-eslint/no-explicit-any */
           (this._protos as any).google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService,
         this._opts) as Promise<{[method: string]: Function}>;
 
