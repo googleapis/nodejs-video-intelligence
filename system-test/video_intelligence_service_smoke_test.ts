@@ -17,6 +17,7 @@ import {Operation} from 'google-gax';
 
 describe('VideoIntelligenceServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const videoIntelligence = require('../src');
 
     const client = new videoIntelligence.v1p1beta1.VideoIntelligenceServiceClient(
@@ -64,6 +65,7 @@ describe('VideoIntelligenceServiceSmokeTest', () => {
   });
 
   it('successfully makes a call to the service', done => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const videoIntelligence = require('../src');
 
     const client = new videoIntelligence.v1p1beta1.VideoIntelligenceServiceClient(
