@@ -17,10 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {APICallback, Callback, CallOptions, Descriptors, ClientOptions, LROperation} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions, LROperation} from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './video_intelligence_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -31,8 +31,6 @@ const version = require('../../../package.json').version;
  * @memberof v1p1beta1
  */
 export class VideoIntelligenceServiceClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}, batching: {}};
-  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -40,6 +38,8 @@ export class VideoIntelligenceServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}, batching: {}};
+  innerApiCalls: {[name: string]: Function};
   operationsClient: gax.OperationsClient;
   videoIntelligenceServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -128,6 +128,7 @@ export class VideoIntelligenceServiceClient {
     const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
     this._protos = this._gaxGrpc.loadProto(
       opts.fallback ?
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         require("../../protos/protos.json") :
         nodejsProtoPath
     );
@@ -135,8 +136,10 @@ export class VideoIntelligenceServiceClient {
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    const protoFilesRoot = opts.fallback?
-      this._gaxModule.protobuf.Root.fromJSON(require("../../protos/protos.json")) :
+    const protoFilesRoot = opts.fallback ?
+      this._gaxModule.protobuf.Root.fromJSON(
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        require("../../protos/protos.json")) :
       this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
     this.operationsClient = this._gaxModule.lro({
@@ -148,7 +151,7 @@ export class VideoIntelligenceServiceClient {
     const annotateVideoMetadata = protoFilesRoot.lookup(
       '.google.cloud.videointelligence.v1p1beta1.AnnotateVideoProgress') as gax.protobuf.Type;
 
-    this._descriptors.longrunning = {
+    this.descriptors.longrunning = {
       annotateVideo: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         annotateVideoResponse.decode.bind(annotateVideoResponse),
@@ -163,7 +166,7 @@ export class VideoIntelligenceServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -188,7 +191,7 @@ export class VideoIntelligenceServiceClient {
     this.videoIntelligenceServiceStub = this._gaxGrpc.createStub(
         this._opts.fallback ?
           (this._protos as protobuf.Root).lookupService('google.cloud.videointelligence.v1p1beta1.VideoIntelligenceService') :
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.videointelligence.v1p1beta1.VideoIntelligenceService,
         this._opts) as Promise<{[method: string]: Function}>;
 
@@ -196,9 +199,8 @@ export class VideoIntelligenceServiceClient {
     // and create an API call method for each.
     const videoIntelligenceServiceStubMethods =
         ['annotateVideo'];
-
     for (const methodName of videoIntelligenceServiceStubMethods) {
-      const innerCallPromise = this.videoIntelligenceServiceStub.then(
+      const callPromise = this.videoIntelligenceServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -211,20 +213,14 @@ export class VideoIntelligenceServiceClient {
         });
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-            this._descriptors.stream[methodName] ||
-            this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+            this.descriptors.stream[methodName] ||
+            this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.videoIntelligenceServiceStub;
@@ -283,19 +279,25 @@ export class VideoIntelligenceServiceClient {
   // -------------------
 
   annotateVideo(
-      request: protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoRequest,
+      request: protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoRequest,
       options?: gax.CallOptions):
       Promise<[
-        LROperation<protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoResponse, protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoProgress>,
-        protosTypes.google.longrunning.IOperation|undefined, {}|undefined
+        LROperation<protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoProgress>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
       ]>;
   annotateVideo(
-      request: protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoRequest,
+      request: protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoRequest,
       options: gax.CallOptions,
       callback: Callback<
-          LROperation<protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoResponse, protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoProgress>,
-          protosTypes.google.longrunning.IOperation|undefined,
-          {}|undefined>): void;
+          LROperation<protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoProgress>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  annotateVideo(
+      request: protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoProgress>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
 /**
  * Performs asynchronous video annotation. Progress and results can be
  * retrieved through the `google.longrunning.Operations` interface.
@@ -341,17 +343,18 @@ export class VideoIntelligenceServiceClient {
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  */
   annotateVideo(
-      request: protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoRequest,
+      request: protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoRequest,
       optionsOrCallback?: gax.CallOptions|Callback<
-          LROperation<protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoResponse, protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoProgress>,
-          protosTypes.google.longrunning.IOperation|undefined, {}|undefined>,
+          LROperation<protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoProgress>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
       callback?: Callback<
-          LROperation<protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoResponse, protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoProgress>,
-          protosTypes.google.longrunning.IOperation|undefined,
-          {}|undefined>):
+          LROperation<protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoProgress>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
       Promise<[
-        LROperation<protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoResponse, protosTypes.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoProgress>,
-        protosTypes.google.longrunning.IOperation|undefined, {}|undefined
+        LROperation<protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1p1beta1.IAnnotateVideoProgress>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
       ]>|void {
     request = request || {};
     let options: gax.CallOptions;
@@ -364,7 +367,7 @@ export class VideoIntelligenceServiceClient {
     }
     options = options || {};
     this.initialize();
-    return this._innerApiCalls.annotateVideo(request, options, callback);
+    return this.innerApiCalls.annotateVideo(request, options, callback);
   }
 
   /**

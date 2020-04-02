@@ -17,10 +17,10 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {APICallback, Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
-import * as protosTypes from '../../protos/protos';
+import * as protos from '../../protos/protos';
 import * as gapicConfig from './streaming_video_intelligence_service_client_config.json';
 
 const version = require('../../../package.json').version;
@@ -31,8 +31,6 @@ const version = require('../../../package.json').version;
  * @memberof v1p3beta1
  */
 export class StreamingVideoIntelligenceServiceClient {
-  private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}, batching: {}};
-  private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   private _opts: ClientOptions;
   private _gaxModule: typeof gax | typeof gax.fallback;
@@ -40,6 +38,8 @@ export class StreamingVideoIntelligenceServiceClient {
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
+  descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}, batching: {}};
+  innerApiCalls: {[name: string]: Function};
   streamingVideoIntelligenceServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -127,13 +127,14 @@ export class StreamingVideoIntelligenceServiceClient {
     const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
     this._protos = this._gaxGrpc.loadProto(
       opts.fallback ?
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         require("../../protos/protos.json") :
         nodejsProtoPath
     );
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
-    this._descriptors.stream = {
+    this.descriptors.stream = {
       streamingAnnotateVideo: new this._gaxModule.StreamDescriptor(gax.StreamType.BIDI_STREAMING)
     };
 
@@ -145,7 +146,7 @@ export class StreamingVideoIntelligenceServiceClient {
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
-    this._innerApiCalls = {};
+    this.innerApiCalls = {};
   }
 
   /**
@@ -170,7 +171,7 @@ export class StreamingVideoIntelligenceServiceClient {
     this.streamingVideoIntelligenceServiceStub = this._gaxGrpc.createStub(
         this._opts.fallback ?
           (this._protos as protobuf.Root).lookupService('google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService') :
-          // tslint:disable-next-line no-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService,
         this._opts) as Promise<{[method: string]: Function}>;
 
@@ -178,9 +179,8 @@ export class StreamingVideoIntelligenceServiceClient {
     // and create an API call method for each.
     const streamingVideoIntelligenceServiceStubMethods =
         ['streamingAnnotateVideo'];
-
     for (const methodName of streamingVideoIntelligenceServiceStubMethods) {
-      const innerCallPromise = this.streamingVideoIntelligenceServiceStub.then(
+      const callPromise = this.streamingVideoIntelligenceServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -193,20 +193,14 @@ export class StreamingVideoIntelligenceServiceClient {
         });
 
       const apiCall = this._gaxModule.createApiCall(
-        innerCallPromise,
+        callPromise,
         this._defaults[methodName],
-        this._descriptors.page[methodName] ||
-            this._descriptors.stream[methodName] ||
-            this._descriptors.longrunning[methodName]
+        this.descriptors.page[methodName] ||
+            this.descriptors.stream[methodName] ||
+            this.descriptors.longrunning[methodName]
       );
 
-      this._innerApiCalls[methodName] = (
-        argument: {},
-        callOptions?: CallOptions,
-        callback?: APICallback
-      ) => {
-        return apiCall(argument, callOptions, callback);
-      };
+      this.innerApiCalls[methodName] = apiCall;
     }
 
     return this.streamingVideoIntelligenceServiceStub;
@@ -280,7 +274,7 @@ export class StreamingVideoIntelligenceServiceClient {
       options?: gax.CallOptions):
     gax.CancellableStream {
     this.initialize();
-    return this._innerApiCalls.streamingAnnotateVideo(options);
+    return this.innerApiCalls.streamingAnnotateVideo(options);
   }
 
 
