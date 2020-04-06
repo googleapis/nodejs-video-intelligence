@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [2.11.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.10.0...v2.11.0) (2020-04-06)
+
+
+### Features
+
+* logo recognition update to GA ([7f02d63](https://www.github.com/googleapis/nodejs-video-intelligence/commit/7f02d6315771b37e4ad473f16a955c4c845b1a83))
+
 ## [2.10.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.9.0...v2.10.0) (2020-03-18)
 
 
