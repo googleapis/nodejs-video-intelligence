@@ -595,7 +595,9 @@ async function main() {
     .example(`node $0 shots gs://cloud-samples-data/video/googlework_short.mp4`)
     .example(`node $0 labels-gcs gs://cloud-samples-data/video/cat.mp4`)
     .example(`node $0 labels-file googlework_short.mp4`)
-    .example(`node $0 safe-search gs://cloud-samples-data/video/googlework_short.mp4`)
+    .example(
+      `node $0 safe-search gs://cloud-samples-data/video/googlework_short.mp4`
+    )
     .example(`node $0 transcription gs://cloud-samples-data/video/cat.mp4`)
     .example(`node $0 video-text ./resources/googlework_short.mp4`)
     .example(
