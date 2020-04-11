@@ -14,7 +14,8 @@
 
 import {describe, it} from 'mocha';
 import {Operation} from 'google-gax';
-import * as videoIntelligence from '../src';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const videoIntelligence = require('../src');
 
 describe('VideoIntelligenceServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
