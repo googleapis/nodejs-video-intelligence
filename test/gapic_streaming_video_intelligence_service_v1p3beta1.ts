@@ -20,7 +20,7 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import { describe, it } from 'mocha';
+import {describe, it} from 'mocha';
 import * as streamingvideointelligenceserviceModule from '../src';
 
 import {PassThrough} from 'stream';
@@ -28,152 +28,221 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
+    instance as protobuf.Message<T>,
+    {defaults: true}
+  );
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject
+  ) as T;
 }
 
-function stubBidiStreamingCall<ResponseType>(response?: ResponseType, error?: Error) {
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
-    });
-    return sinon.stub().returns(mockStream);
+function stubBidiStreamingCall<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  return sinon.stub().returns(mockStream);
 }
 
 describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
-    it('has servicePath', () => {
-        const servicePath = streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient.servicePath;
-        assert(servicePath);
-    });
+  it('has servicePath', () => {
+    const servicePath =
+      streamingvideointelligenceserviceModule.v1p3beta1
+        .StreamingVideoIntelligenceServiceClient.servicePath;
+    assert(servicePath);
+  });
 
-    it('has apiEndpoint', () => {
-        const apiEndpoint = streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient.apiEndpoint;
-        assert(apiEndpoint);
-    });
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      streamingvideointelligenceserviceModule.v1p3beta1
+        .StreamingVideoIntelligenceServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
 
-    it('has port', () => {
-        const port = streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient.port;
-        assert(port);
-        assert(typeof port === 'number');
-    });
+  it('has port', () => {
+    const port =
+      streamingvideointelligenceserviceModule.v1p3beta1
+        .StreamingVideoIntelligenceServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
 
-    it('should create a client with no option', () => {
-        const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient();
-        assert(client);
-    });
+  it('should create a client with no option', () => {
+    const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient();
+    assert(client);
+  });
 
-    it('should create a client with gRPC fallback', () => {
-        const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
-            fallback: true,
+  it('should create a client with gRPC fallback', () => {
+    const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
+      {
+        fallback: true,
+      }
+    );
+    assert(client);
+  });
+
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    assert.strictEqual(client.streamingVideoIntelligenceServiceStub, undefined);
+    await client.initialize();
+    assert(client.streamingVideoIntelligenceServiceStub);
+  });
+
+  it('has close method', () => {
+    const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.close();
+  });
+
+  it('has getProjectId method', async () => {
+    const fakeProjectId = 'fake-project-id';
+    const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+    const result = await client.getProjectId();
+    assert.strictEqual(result, fakeProjectId);
+    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+  });
+
+  it('has getProjectId method with callback', async () => {
+    const fakeProjectId = 'fake-project-id';
+    const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
+      {
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      }
+    );
+    client.auth.getProjectId = sinon
+      .stub()
+      .callsArgWith(0, null, fakeProjectId);
+    const promise = new Promise((resolve, reject) => {
+      client.getProjectId((err?: Error | null, projectId?: string | null) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(projectId);
+        }
+      });
+    });
+    const result = await promise;
+    assert.strictEqual(result, fakeProjectId);
+  });
+
+  describe('streamingAnnotateVideo', () => {
+    it('invokes streamingAnnotateVideo without error', async () => {
+      const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoResponse()
+      );
+      client.innerApiCalls.streamingAnnotateVideo = stubBidiStreamingCall(
+        expectedResponse
+      );
+      const stream = client.streamingAnnotateVideo();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
-        assert(client);
+        stream.write(request);
+        stream.end();
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.streamingAnnotateVideo as SinonStub)
+          .getCall(0)
+          .calledWithExactly(undefined)
+      );
+      assert.deepStrictEqual(
+        (((stream as unknown) as PassThrough)._transform as SinonStub).getCall(
+          0
+        ).args[0],
+        request
+      );
     });
 
-    it('has initialize method and supports deferred initialization', async () => {
-        const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
+    it('invokes streamingAnnotateVideo with error', async () => {
+      const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamingAnnotateVideo = stubBidiStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.streamingAnnotateVideo();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
-        assert.strictEqual(client.streamingVideoIntelligenceServiceStub, undefined);
-        await client.initialize();
-        assert(client.streamingVideoIntelligenceServiceStub);
+        stream.write(request);
+        stream.end();
+      });
+      await assert.rejects(async () => {
+        await promise;
+      }, expectedError);
+      assert(
+        (client.innerApiCalls.streamingAnnotateVideo as SinonStub)
+          .getCall(0)
+          .calledWithExactly(undefined)
+      );
+      assert.deepStrictEqual(
+        (((stream as unknown) as PassThrough)._transform as SinonStub).getCall(
+          0
+        ).args[0],
+        request
+      );
     });
-
-    it('has close method', () => {
-        const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        client.close();
-    });
-
-    it('has getProjectId method', async () => {
-        const fakeProjectId = 'fake-project-id';
-        const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-        const result = await client.getProjectId();
-        assert.strictEqual(result, fakeProjectId);
-        assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-        const fakeProjectId = 'fake-project-id';
-        const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
-            projectId: 'bogus',
-        });
-        client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-        const promise = new Promise((resolve, reject) => {
-            client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(projectId);
-                }
-            });
-        });
-        const result = await promise;
-        assert.strictEqual(result, fakeProjectId);
-    });
-
-    describe('streamingAnnotateVideo', () => {
-        it('invokes streamingAnnotateVideo without error', async () => {
-            const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoRequest());
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoResponse());
-            client.innerApiCalls.streamingAnnotateVideo = stubBidiStreamingCall(expectedResponse);
-            const stream = client.streamingAnnotateVideo();
-            const promise = new Promise((resolve, reject) => {
-                stream.on('data', (response: protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoResponse) => {
-                    resolve(response);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-                stream.write(request);
-                stream.end();
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.streamingAnnotateVideo as SinonStub)
-                .getCall(0).calledWithExactly(undefined));
-            assert.deepStrictEqual(((stream as unknown as PassThrough)
-                ._transform as SinonStub).getCall(0).args[0], request);
-        });
-
-        it('invokes streamingAnnotateVideo with error', async () => {
-            const client = new streamingvideointelligenceserviceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoRequest());const expectedError = new Error('expected');
-            client.innerApiCalls.streamingAnnotateVideo = stubBidiStreamingCall(undefined, expectedError);
-            const stream = client.streamingAnnotateVideo();
-            const promise = new Promise((resolve, reject) => {
-                stream.on('data', (response: protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoResponse) => {
-                    resolve(response);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-                stream.write(request);
-                stream.end();
-            });
-            await assert.rejects(async () => { await promise; }, expectedError);
-            assert((client.innerApiCalls.streamingAnnotateVideo as SinonStub)
-                .getCall(0).calledWithExactly(undefined));
-            assert.deepStrictEqual(((stream as unknown as PassThrough)
-                ._transform as SinonStub).getCall(0).args[0], request);
-        });
-    });
+  });
 });

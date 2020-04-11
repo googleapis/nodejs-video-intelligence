@@ -14,11 +14,10 @@
 
 import {describe, it} from 'mocha';
 import {Operation} from 'google-gax';
+import * as videoIntelligence from '../src';
 
 describe('VideoIntelligenceServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
-    const videoIntelligence = require('../src');
-
     const client = new videoIntelligence.v1p1beta1.VideoIntelligenceServiceClient(
       {
         // optional auth parameters.
@@ -64,8 +63,6 @@ describe('VideoIntelligenceServiceSmokeTest', () => {
   });
 
   it('successfully makes a call to the service', done => {
-    const videoIntelligence = require('../src');
-
     const client = new videoIntelligence.v1p1beta1.VideoIntelligenceServiceClient(
       {
         // optional auth parameters.

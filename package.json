@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
-    "node": ">=8.10.0"
+    "node": ">=10"
   },
   "repository": "googleapis/nodejs-video-intelligence",
   "main": "build/src/index.js",
@@ -48,6 +48,7 @@
   "devDependencies": {
     "@types/mocha": "^7.0.0",
     "@types/node": "^12.12.29",
+    "@types/sinon": "^9.0.0",
     "c8": "^7.0.0",
     "gts": "^2.0.0",
     "jsdoc": "^3.6.3",
@@ -58,6 +59,7 @@
     "null-loader": "^3.0.0",
     "pack-n-play": "^1.0.0-2",
     "prettier": "^1.17.1",
+    "sinon": "^9.0.2",
     "ts-loader": "^6.2.1",
     "typescript": "^3.8.3",
     "webpack": "^4.42.0",
