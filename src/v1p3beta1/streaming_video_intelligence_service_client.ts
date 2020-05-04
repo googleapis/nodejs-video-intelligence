@@ -82,8 +82,8 @@ export class StreamingVideoIntelligenceServiceClient {
       opts && opts.servicePath
         ? opts.servicePath
         : opts && opts.apiEndpoint
-        ? opts.apiEndpoint
-        : staticMembers.servicePath;
+          ? opts.apiEndpoint
+          : staticMembers.servicePath;
     const port = opts && opts.port ? opts.port : staticMembers.port;
 
     if (!opts) {
@@ -141,7 +141,7 @@ export class StreamingVideoIntelligenceServiceClient {
     this._protos = this._gaxGrpc.loadProto(
       opts.fallback
         ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
+        require('../../protos/protos.json')
         : nodejsProtoPath
     );
 
@@ -189,11 +189,11 @@ export class StreamingVideoIntelligenceServiceClient {
     this.streamingVideoIntelligenceServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService'
-          )
+          'google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService'
+        )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.videointelligence.v1p3beta1
-            .StreamingVideoIntelligenceService,
+        (this._protos as any).google.cloud.videointelligence.v1p3beta1
+          .StreamingVideoIntelligenceService,
       this._opts
     ) as Promise<{[method: string]: Function}>;
 
@@ -220,8 +220,8 @@ export class StreamingVideoIntelligenceServiceClient {
         callPromise,
         this._defaults[methodName],
         this.descriptors.page[methodName] ||
-          this.descriptors.stream[methodName] ||
-          this.descriptors.longrunning[methodName]
+        this.descriptors.stream[methodName] ||
+        this.descriptors.longrunning[methodName]
       );
 
       this.innerApiCalls[methodName] = apiCall;
