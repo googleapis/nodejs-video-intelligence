@@ -1,5 +1,6 @@
 import synthtool as s
 import synthtool.gcp as gcp
+import synthtool.languages.node as node
 import logging
 import subprocess
 
@@ -28,10 +29,8 @@ for version in versions:
     s.copy(library, excludes=["package.json", "README.md", "src/index.ts",
                               "smoke-test/video_intelligence_service_smoke_test.ts"])
 
-templates = common_templates.node_library(source_location='build/src')
+templates = common_templates.node_library(
+    source_location='build/src', versions=versions, default_version="v1")
 s.copy(templates)
 
-# Node.js specific cleanup
-subprocess.run(["npm", "install"])
-subprocess.run(["npm", "run", "lint"])
-subprocess.run(['npx', 'compileProtos', 'src'])
+node.postprocess_gapic_library()
