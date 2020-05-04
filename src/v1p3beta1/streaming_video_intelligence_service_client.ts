@@ -20,6 +20,7 @@ import * as gax from 'google-gax';
 import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import * as path from 'path';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as protos from '../../protos/protos';
 import * as gapicConfig from './streaming_video_intelligence_service_client_config.json';
 
