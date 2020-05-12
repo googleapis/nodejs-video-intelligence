@@ -16,14 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  StreamingVideoIntelligenceServiceClient,
-  VideoIntelligenceServiceClient,
-} from '@google-cloud/video-intelligence';
+import * as videointelligence from '@google-cloud/video-intelligence';
 
 function main() {
-  new StreamingVideoIntelligenceServiceClient();
-  new VideoIntelligenceServiceClient();
+  new videointelligence.v1p3beta1.StreamingVideoIntelligenceServiceClient();
+  new videointelligence.VideoIntelligenceServiceClient();
 }
 
 main();
