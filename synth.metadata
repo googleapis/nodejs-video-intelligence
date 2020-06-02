@@ -4,35 +4,26 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-video-intelligence.git",
-        "sha": "c06330f9645832fead29b420f8da91843269243e"
+        "sha": "920a31d31edb068cd70db427698cd3b7b8620da5"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e0f9d9e1f9de890db765be46f45ca8490723e3eb",
-        "internalRef": "309824146"
+        "sha": "ce56112c3585cae794cc6c066eee175b931bebbc",
+        "internalRef": "314387187"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "5b48b0716a36ca069db3038da7e205c87a22ed19"
+        "sha": "cb3c683e958a4b5c016bb3734436fc1cb887eb7b"
       }
     }
   ],
   "destinations": [
-    {
-      "client": {
-        "source": "googleapis",
-        "apiName": "video-intelligence",
-        "apiVersion": "v1",
-        "language": "typescript",
-        "generator": "gapic-generator-typescript"
-      }
-    },
     {
       "client": {
         "source": "googleapis",
@@ -65,6 +56,15 @@
         "source": "googleapis",
         "apiName": "video-intelligence",
         "apiVersion": "v1p3beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "video-intelligence",
+        "apiVersion": "v1",
         "language": "typescript",
         "generator": "gapic-generator-typescript"
       }
