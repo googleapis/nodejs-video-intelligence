@@ -19,7 +19,54 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "04cb397eb7590ea1e6c10a39fca3d8fe0fb3d256"
+        "sha": "5b48b0716a36ca069db3038da7e205c87a22ed19"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "video-intelligence",
+        "apiVersion": "v1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "video-intelligence",
+        "apiVersion": "v1beta2",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "video-intelligence",
+        "apiVersion": "v1p1beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "video-intelligence",
+        "apiVersion": "v1p2beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "video-intelligence",
+        "apiVersion": "v1p3beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     }
   ]

@@ -25,7 +25,7 @@ for version in versions:
     )
 
     # skip index, protos, package.json, and README.md
-    s.copy(library, excludes=["package.json", "README.md", "src/index.ts"])
+    s.copy(library, excludes=["package.json", "README.md"])
 
 templates = common_templates.node_library(
     source_location="build/src", versions=versions, default_version="v1")
