@@ -46,7 +46,7 @@ async function main(path = 'YOUR_LOCAL_FILE') {
       };
       chunks.push(request);
     })
-    .on('close', function() {
+    .on('close', () => {
       // configRequest should be the first in the stream of requests
       stream.write(configRequest);
       for (let i = 0; i < chunks.length; i++) {
@@ -61,13 +61,14 @@ async function main(path = 'YOUR_LOCAL_FILE') {
     const shotChanges = annotations.shotAnnotations;
     console.log(JSON.stringify(shotChanges));
     if (shotChanges.length === 1) {
-      console.log(`The entire video is one shot.`);
+      console.log('The entire video is one shot.');
     }
     shotChanges.forEach(shot => {
       console.log(
         ` Shot: ${shot.startTimeOffset.seconds || 0}` +
-          `.${(shot.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${shot
-            .endTimeOffset.seconds || 0}` +
+          `.${(shot.startTimeOffset.nanos / 1e6).toFixed(0)}s to ${
+            shot.endTimeOffset.seconds || 0
+          }` +
           `.${(shot.endTimeOffset.nanos / 1e6).toFixed(0)}s`
       );
     });

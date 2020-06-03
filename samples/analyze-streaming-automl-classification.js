@@ -62,7 +62,7 @@ async function main(
       };
       chunks.push(request);
     })
-    .on('close', function() {
+    .on('close', () => {
       // configRequest should be the first in the stream of requests
       stream.write(configRequest);
       for (let i = 0; i < chunks.length; i++) {
@@ -79,9 +79,9 @@ async function main(
       const labels = annotations.labelAnnotations;
       labels.forEach(label => {
         console.log(
-          `Label ${label.entity.description} occurs at: ${label.frames[0]
-            .timeOffset.seconds || 0}` +
-            `.${(label.frames[0].timeOffset.nanos / 1e6).toFixed(0)}s`
+          `Label ${label.entity.description} occurs at: ${
+            label.frames[0].timeOffset.seconds || 0
+          }` + `.${(label.frames[0].timeOffset.nanos / 1e6).toFixed(0)}s`
         );
         console.log(` Confidence: ${label.frames[0].confidence}`);
       });

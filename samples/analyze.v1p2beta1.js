@@ -72,7 +72,7 @@ async function analyzeTextGCS(gcsUri) {
           `Time offset for the frame: ${timeOffset.seconds}` +
             `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
         );
-        console.log(`Rotated Bounding Box Vertices:`);
+        console.log('Rotated Bounding Box Vertices:');
         frame.rotatedBoundingBox.vertices.forEach(vertex => {
           console.log(`Vertex.x:${vertex.x}, Vertex.y:${vertex.y}`);
         });
@@ -145,7 +145,7 @@ async function analyzeObjectTrackingGCS(gcsUri) {
       `Time offset for the first frame: ${timeOffset.seconds}` +
         `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
     );
-    console.log(`Bounding box position:`);
+    console.log('Bounding box position:');
     console.log(`\tleft   :${box.left}`);
     console.log(`\ttop    :${box.top}`);
     console.log(`\tright  :${box.right}`);
@@ -219,7 +219,7 @@ async function analyzeText(path) {
           `Time offset for the frame: ${timeOffset.seconds}` +
             `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
         );
-        console.log(`Rotated Bounding Box Vertices:`);
+        console.log('Rotated Bounding Box Vertices:');
         frame.rotatedBoundingBox.vertices.forEach(vertex => {
           console.log(`Vertex.x:${vertex.x}, Vertex.y:${vertex.y}`);
         });
@@ -295,7 +295,7 @@ async function analyzeObjectTracking(path) {
       `Time offset for the first frame: ${timeOffset.seconds}` +
         `.${(timeOffset.nanos / 1e6).toFixed(0)}s`
     );
-    console.log(`Bounding box position:`);
+    console.log('Bounding box position:');
     console.log(`\tleft   :${box.left}`);
     console.log(`\ttop    :${box.top}`);
     console.log(`\tright  :${box.right}`);
@@ -305,42 +305,42 @@ async function analyzeObjectTracking(path) {
 }
 
 async function main() {
-  require(`yargs`)
+  require('yargs')
     .demand(1)
     .command(
-      `video-text-gcs <gcsUri>`,
-      `Analyzes text in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
+      'video-text-gcs <gcsUri>',
+      'Analyzes text in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.',
       {},
       opts => analyzeTextGCS(opts.gcsUri)
     )
     .command(
-      `track-objects-gcs <gcsUri>`,
-      `Analyzes objects in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.`,
+      'track-objects-gcs <gcsUri>',
+      'Analyzes objects in a video stored in Google Cloud Storage using the Cloud Video Intelligence API.',
       {},
       opts => analyzeObjectTrackingGCS(opts.gcsUri)
     )
     .command(
-      `video-text <path>`,
-      `Analyzes text in a video stored in a local file using the Cloud Video Intelligence API.`,
+      'video-text <path>',
+      'Analyzes text in a video stored in a local file using the Cloud Video Intelligence API.',
       {},
       opts => analyzeText(opts.path)
     )
     .command(
-      `track-objects <path>`,
-      `Analyzes objects in a video stored in a local file using the Cloud Video Intelligence API.`,
+      'track-objects <path>',
+      'Analyzes objects in a video stored in a local file using the Cloud Video Intelligence API.',
       {},
       opts => analyzeObjectTracking(opts.path)
     )
-    .example(`node $0 video-text ./resources/googlework_short.mp4`)
+    .example('node $0 video-text ./resources/googlework_short.mp4')
     .example(
-      `node $0 video-text-gcs gs://nodejs-docs-samples/video/googlework_short.mp4`
+      'node $0 video-text-gcs gs://nodejs-docs-samples/video/googlework_short.mp4'
     )
-    .example(`node $0 track-objects ./resources/cat.mp4`)
-    .example(`node $0 track-objects-gcs gs://nodejs-docs-samples/video/cat.mp4`)
+    .example('node $0 track-objects ./resources/googlework_short.mp4')
+    .example('node $0 track-objects-gcs gs://nodejs-docs-samples/video/cat.mp4')
     .wrap(120)
     .recommendCommands()
     .epilogue(
-      `For more information, see https://cloud.google.com/video-intelligence/docs`
+      'For more information, see https://cloud.google.com/video-intelligence/docs'
     )
     .help()
     .strict().argv;
