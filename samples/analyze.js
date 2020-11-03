@@ -297,8 +297,8 @@ async function analyzeVideoTranscription(gcsUri) {
     // and has its own confidence score.
     for (const alternative of speechTranscription.alternatives) {
       console.log('Alternative level information:');
-      console.log('Transcript: ' + alternative.transcript);
-      console.log('Confidence: ' + alternative.confidence);
+      console.log(`Transcript: ${alternative.transcript}`);
+      console.log(`Confidence: ${alternative.confidence}`);
 
       console.log('Word level information:');
       for (const wordInfo of alternative.words) {
