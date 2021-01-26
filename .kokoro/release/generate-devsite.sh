@@ -50,7 +50,7 @@ sed -i -e '7i\
  \ \ \ \ \ - name: Overview
 ' ./yaml/toc.yml
 sed -i -e '8i\
- \ \ \ \ \ \ \ homepage: readme.md
+ \ \ \ \ \ \ \ homepage: index.md
 ' ./yaml/toc.yml
 
 ## Copy everything to devsite
@@ -58,5 +58,5 @@ cp ./yaml/toc.yml ./_devsite/toc.yml
 # cp ./quickstart.yml ./_devsite/index.yml
 cp ./yaml/$NAME.yml ./_devsite/$NAME.yml
 
-cp ./README.md ./_devsite/readme.md
+cp ./README.md ./_devsite/index.md
 
