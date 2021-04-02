@@ -22,8 +22,8 @@
   * [Analyze-streaming-shot-change](#analyze-streaming-shot-change)
   * [Analyze](#analyze)
   * [Analyze.v1p2beta1](#analyze.v1p2beta1)
-  * [Analyze_face_detection](#analyze_face_detection)
-  * [Analyze_face_detection_gcs](#analyze_face_detection_gcs)
+  * [analyze-face-detection](#analyze-face-detection)
+  * [analyze-face-detection-gcs](#analyze-face-detection-gcs)
   * [Detect_logo](#detect_logo)
   * [Detect_logo_gcs](#detect_logo_gcs)
   * [Quickstart](#quickstart)
@@ -213,16 +213,16 @@ __Usage:__
 
 
 
-### Analyze_face_detection
+### analyze-face-detection
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze_face_detection.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-face-detection.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze_face_detection.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-face-detection.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/analyze_face_detection.js`
+`node samples/analyze-face-detection.js`
 
 
 -----
@@ -230,16 +230,16 @@ __Usage:__
 
 
 
-### Analyze_face_detection_gcs
+### analyze-face-detection-gcs
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze_face_detection_gcs.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-face-detection-gcs.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze_face_detection_gcs.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-face-detection-gcs.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/analyze_face_detection_gcs.js`
+`node samples/analyze-face-detection-gcs.js`
 
 
 -----
