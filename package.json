@@ -47,6 +47,7 @@
     "google-gax": "^2.9.2"
   },
   "devDependencies": {
+    "cloud-rad": "fhinkel/cloud-rad",
     "@types/mocha": "^8.0.0",
     "@types/node": "^12.12.29",
     "@types/sinon": "^10.0.0",
