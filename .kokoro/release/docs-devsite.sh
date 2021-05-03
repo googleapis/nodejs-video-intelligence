@@ -18,4 +18,5 @@ set -eo pipefail
 
 
 npm i
+npm i cloud-rad
 npx cloud-rad
