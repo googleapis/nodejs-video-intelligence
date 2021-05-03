@@ -47,11 +47,11 @@
     "google-gax": "^2.9.2"
   },
   "devDependencies": {
-    "cloud-rad": "fhinkel/cloud-rad",
     "@types/mocha": "^8.0.0",
     "@types/node": "^12.12.29",
     "@types/sinon": "^10.0.0",
     "c8": "^7.0.0",
+    "cloud-rad": "github:fhinkel/cloud-rad",
     "eslint-plugin-node": "^11.1.0",
     "gts": "^3.0.0",
     "jsdoc": "^3.6.3",
