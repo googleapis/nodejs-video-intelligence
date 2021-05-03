@@ -16,8 +16,11 @@
 
 set -eo pipefail
 
+echo "in video-intelligence.sh"
+
 echo "$(pwd)"
 echo "$(ls -al)"
+
 
 npm install
 npm install cloud-rad
