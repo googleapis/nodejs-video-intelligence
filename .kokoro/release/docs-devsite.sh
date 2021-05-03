@@ -16,4 +16,6 @@
 
 set -eo pipefail
 
+
+npm i
 npx cloud-rad
