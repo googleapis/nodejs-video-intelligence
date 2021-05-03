@@ -16,6 +16,9 @@
 
 set -eo pipefail
 
+echo "$(pwd)"
+echo "$(ls -al)"
+
 npm install
 npm install cloud-rad
 npx cloud-rad
