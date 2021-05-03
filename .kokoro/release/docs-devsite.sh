@@ -24,12 +24,6 @@ if [[ -z "$CREDENTIALS" ]]; then
   cd $(dirname $0)/../..
 fi
 
-echo "in video-intelligence.sh"
-
-echo "$(pwd)"
-echo "$(ls -al)"
-
-
 npm install
 npm install cloud-rad
 npx cloud-rad
