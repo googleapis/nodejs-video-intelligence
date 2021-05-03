@@ -16,7 +16,6 @@
 
 set -eo pipefail
 
-
-npm i
-npm i cloud-rad
+npm install
+npm install cloud-rad
 npx cloud-rad
