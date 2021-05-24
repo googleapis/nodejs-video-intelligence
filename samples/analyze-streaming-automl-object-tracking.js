@@ -27,9 +27,8 @@ async function main(
   // const modelId = 'AutoML model'
   // const projectId = 'Your GCP Project'
 
-  const {
-    StreamingVideoIntelligenceServiceClient,
-  } = require('@google-cloud/video-intelligence').v1p3beta1;
+  const {StreamingVideoIntelligenceServiceClient} =
+    require('@google-cloud/video-intelligence').v1p3beta1;
   const fs = require('fs');
 
   // Instantiates a client
@@ -71,9 +70,7 @@ async function main(
       stream.end();
     });
 
-  const stream = client
-      .streamingAnnotateVideo()
-      .on('data', response => {
+  const stream = client.streamingAnnotateVideo().on('data', response => {
     //Gets annotations for video
     const annotations = response.annotationResults;
     const objects = annotations.objectAnnotations;
@@ -83,9 +80,9 @@ async function main(
       console.log(`Track id: ${object.trackId}`);
       console.log(`Confidence: ${object.confidence}`);
       console.log(
-          `Time offset for the frame: ${
-              object.frames[0].timeOffset.seconds || 0
-          }` + `.${(object.frames[0].timeOffset.nanos / 1e6).toFixed(0)}s`
+        `Time offset for the frame: ${
+          object.frames[0].timeOffset.seconds || 0
+        }` + `.${(object.frames[0].timeOffset.nanos / 1e6).toFixed(0)}s`
       );
       //Every annotation has only one frame.
       const box = object.frames[0].normalizedBoundingBox;
