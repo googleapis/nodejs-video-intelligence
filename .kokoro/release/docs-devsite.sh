@@ -24,5 +24,5 @@ if [[ -z "$CREDENTIALS" ]]; then
   cd $(dirname $0)/../..
 fi
 
-npm install
+npm install @google-cloud/cloud-rad@^0.2.0
 npx @google-cloud/cloud-rad
