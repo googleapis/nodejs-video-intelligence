@@ -25,5 +25,4 @@ if [[ -z "$CREDENTIALS" ]]; then
 fi
 
 npm install
-npm install @google-cloud/cloud-rad
 npx @google-cloud/cloud-rad
