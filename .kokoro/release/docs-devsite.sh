@@ -24,10 +24,6 @@ if [[ -z "$CREDENTIALS" ]]; then
   cd $(dirname $0)/../..
 fi
 
-env 
-
-cat /home/node/.npm-global
-
 
 npm install
 npm install cloud-rad
