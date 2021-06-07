@@ -25,9 +25,9 @@ import {
   ClientOptions,
   LROperation,
 } from 'google-gax';
-import * as path from 'path';
 
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
  * `src/v1beta2/video_intelligence_service_client_config.json`.
@@ -143,32 +143,13 @@ export class VideoIntelligenceServiceClient {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    const protoFilesRoot = opts.fallback
-      ? this._gaxModule.protobuf.Root.fromJSON(
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        )
-      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
     this.operationsClient = this._gaxModule
       .lro({
@@ -240,13 +221,14 @@ export class VideoIntelligenceServiceClient {
     const videoIntelligenceServiceStubMethods = ['annotateVideo'];
     for (const methodName of videoIntelligenceServiceStubMethods) {
       const callPromise = this.videoIntelligenceServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -369,9 +351,10 @@ export class VideoIntelligenceServiceClient {
    *   supported, which must be specified in the following format:
    *   `gs://bucket-id/object-id` (other URI formats return
    *   {@link google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT}). For
-   *   more information, see [Request URIs](https://cloud.google.com/storage/docs/request-endpoints). A video
-   *   URI may include wildcards in `object-id`, and thus identify multiple
-   *   videos. Supported wildcards: '*' to match 0 or more characters;
+   *   more information, see [Request
+   *   URIs](https://cloud.google.com/storage/docs/request-endpoints). A video URI
+   *   may include wildcards in `object-id`, and thus identify multiple videos.
+   *   Supported wildcards: '*' to match 0 or more characters;
    *   '?' to match 1 character. If unset, the input video should be embedded
    *   in the request as `input_content`. If set, `input_content` should be unset.
    * @param {Buffer} request.inputContent
@@ -388,7 +371,8 @@ export class VideoIntelligenceServiceClient {
    *   URIs are supported, which must be specified in the following format:
    *   `gs://bucket-id/object-id` (other URI formats return
    *   {@link google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT}). For
-   *   more information, see [Request URIs](https://cloud.google.com/storage/docs/request-endpoints).
+   *   more information, see [Request
+   *   URIs](https://cloud.google.com/storage/docs/request-endpoints).
    * @param {string} [request.locationId]
    *   Optional. Cloud region where annotation should take place. Supported cloud
    *   regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region

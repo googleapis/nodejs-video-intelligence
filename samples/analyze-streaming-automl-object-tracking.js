@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,22 +14,34 @@
 
 'use strict';
 
-async function main(path = 'YOUR_LOCAL_FILE') {
-  // [START video_streaming_explicit_content_detection_beta]
+async function main(
+  path = 'YOUR_LOCAL_FILE',
+  projectId = 'YOUR_GCP_PROJECT',
+  modelId = 'YOUR_AUTOML_MODELID'
+) {
+  // [START video_streaming_automl_object_tracking_beta]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   // const path = 'Local file to analyze, e.g. ./my-file.mp4';
+  // const modelId = 'AutoML model'
+  // const projectId = 'Your GCP Project'
+
   const {StreamingVideoIntelligenceServiceClient} =
     require('@google-cloud/video-intelligence').v1p3beta1;
   const fs = require('fs');
 
   // Instantiates a client
   const client = new StreamingVideoIntelligenceServiceClient();
+
   // Streaming configuration
+  const modelName = `projects/${projectId}/locations/us-central1/models/${modelId}`;
   const configRequest = {
     videoConfig: {
-      feature: 'STREAMING_EXPLICIT_CONTENT_DETECTION',
+      feature: 'STREAMING_AUTOML_OBJECT_TRACKING',
+      automlObjectTrackingConfig: {
+        modelName: modelName,
+      },
     },
   };
 
@@ -38,6 +50,9 @@ async function main(path = 'YOUR_LOCAL_FILE') {
     encoding: 'base64',
   });
   //Load file content
+  // Note: Input videos must have supported video codecs. See
+  // https://cloud.google.com/video-intelligence/docs/streaming/streaming#supported_video_codecs
+  // for more details.
   const chunks = [];
   readStream
     .on('data', chunk => {
@@ -58,15 +73,26 @@ async function main(path = 'YOUR_LOCAL_FILE') {
   const stream = client.streamingAnnotateVideo().on('data', response => {
     //Gets annotations for video
     const annotations = response.annotationResults;
-    const explicitContentResults = annotations.explicitAnnotation.frames;
-    explicitContentResults.forEach(result => {
+    const objects = annotations.objectAnnotations;
+    objects.forEach(object => {
+      console.log(`Entity description: ${object.entity.description}`);
+      console.log(`Entity id: ${object.entity.entityId}`);
+      console.log(`Track id: ${object.trackId}`);
+      console.log(`Confidence: ${object.confidence}`);
       console.log(
-        `Time: ${result.timeOffset.seconds || 0}` +
-          `.${(result.timeOffset.nanos / 1e6).toFixed(0)}s`
+        `Time offset for the frame: ${
+          object.frames[0].timeOffset.seconds || 0
+        }` + `.${(object.frames[0].timeOffset.nanos / 1e6).toFixed(0)}s`
       );
-      console.log(` Pornography likelihood: ${result.pornographyLikelihood}`);
+      //Every annotation has only one frame.
+      const box = object.frames[0].normalizedBoundingBox;
+      console.log('Bounding box position:');
+      console.log(`\tleft: ${box.left}`);
+      console.log(`\ttop: ${box.top}`);
+      console.log(`\tright: ${box.right}`);
+      console.log(`\tbottom: ${box.bottom}`);
     });
   });
-  // [END video_streaming_explicit_content_detection_beta]
+  // [END video_streaming_automl_object_tracking_beta]
 }
 main(...process.argv.slice(2)).catch(console.error());
