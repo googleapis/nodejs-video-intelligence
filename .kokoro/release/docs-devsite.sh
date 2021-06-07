@@ -24,6 +24,9 @@ if [[ -z "$CREDENTIALS" ]]; then
   cd $(dirname $0)/../..
 fi
 
+env 
+
+
 npm install
 npm install cloud-rad
 npx cloud-rad
