@@ -24,15 +24,6 @@ if [[ -z "$CREDENTIALS" ]]; then
   cd $(dirname $0)/../..
 fi
 
-npm view cloud-rad
-
-npm view @google-cloud/cloud-rad
-
-npm view @google-cloud/cloud-rad
-
-
-npm view @google-cloud/cloud-does-not-exist
-
 npm install
-npm install cloud-rad
-npx cloud-rad
+npm install @google-cloud/cloud-rad
+npx @google-cloud/cloud-rad
