@@ -26,6 +26,8 @@ fi
 
 env 
 
+cat /home/node/.npm-global
+
 
 npm install
 npm install cloud-rad
