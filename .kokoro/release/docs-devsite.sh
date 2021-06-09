@@ -24,6 +24,8 @@ if [[ -z "$CREDENTIALS" ]]; then
   cd $(dirname $0)/../..
 fi
 
+echo "In docs-deviste.sh in video-int."
+
 if [[ -n $VERSION ]]; then
   echo "Checking out $VERSION in docs-deviste.sh in video-int."
   # git checkout $VERSION
