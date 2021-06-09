@@ -52,7 +52,8 @@ s.copy(templates, excludes=[
   '.kokoro/presubmit/node12/system-test.cfg',
   '.kokoro/release/docs-devsite.cfg',
   '.kokoro/release/docs-devsite.sh',
-  'api-extractor.json'
+  'api-extractor.json',
+  'trampolinerc'
 ])
 
 node.postprocess_gapic_library_hermetic()
