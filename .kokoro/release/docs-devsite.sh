@@ -26,10 +26,14 @@ fi
 
 echo "In docs-deviste.sh in video-int."
 
+env
+
 if [[ -n $VERSION ]]; then
   echo "Checking out $VERSION in docs-deviste.sh in video-int."
   # git checkout $VERSION
 fi
+
+exit 0
 
 npm install
 npm install @google-cloud/cloud-rad@^0.2.0
