@@ -19,6 +19,7 @@
   * [Analyze-streaming-annotation-to-storage](#analyze-streaming-annotation-to-storage)
   * [Analyze-streaming-automl-classification](#analyze-streaming-automl-classification)
   * [Analyze-streaming-automl-object-tracking](#analyze-streaming-automl-object-tracking)
+  * [Analyze-streaming-automl-action-recognition](#analyze-streaming-automl-action-recognition)
   * [Analyze-streaming-labels](#analyze-streaming-labels)
   * [Analyze-streaming-object](#analyze-streaming-object)
   * [Analyze-streaming-safe-search](#analyze-streaming-safe-search)
@@ -160,6 +161,22 @@ __Usage:__
 
 -----
 
+
+
+
+### Analyze-streaming-automl-action-recognition
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-automl-action-recognition.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-automl-action-recognition.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/analyze-streaming-automl-action-recognition.js`
+
+
+-----
 
 
 
