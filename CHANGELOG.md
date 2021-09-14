@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [3.3.7](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.3.6...v3.3.7) (2021-09-14)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#613](https://www.github.com/googleapis/nodejs-video-intelligence/issues/613)) ([68e079f](https://www.github.com/googleapis/nodejs-video-intelligence/commit/68e079f1d985d60576342663a2008d316502e205))
+
 ### [3.3.6](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.3.5...v3.3.6) (2021-07-21)
 
 
