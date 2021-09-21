@@ -314,6 +314,10 @@ export class StreamingVideoIntelligenceServiceClient {
    * stream.on('end', () => { ... });
    * stream.write(request);
    * stream.end();
+   *
+   * @example <caption>include:samples/generated/v1p3beta1/streaming_video_intelligence_service.streaming_annotate_video.js</caption>
+   * region_tag:videointelligence_streaming_annotate_video_sample
+   *
    */
   streamingAnnotateVideo(options?: CallOptions): gax.CancellableStream {
     this.initialize();
