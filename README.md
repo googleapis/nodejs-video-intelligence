@@ -6,7 +6,6 @@
 
 
 [![npm version](https://img.shields.io/npm/v/@google-cloud/video-intelligence.svg)](https://www.npmjs.org/package/@google-cloud/video-intelligence)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-video-intelligence/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-video-intelligence)
 
 
 
