@@ -313,7 +313,7 @@ export class StreamingVideoIntelligenceServiceClient {
    */
   streamingAnnotateVideo(options?: CallOptions): gax.CancellableStream {
     this.initialize();
-    return this.innerApiCalls.streamingAnnotateVideo(options);
+    return this.innerApiCalls.streamingAnnotateVideo(null, options);
   }
 
   /**

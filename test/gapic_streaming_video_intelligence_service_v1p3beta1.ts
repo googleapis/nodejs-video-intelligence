@@ -192,7 +192,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
       assert(
         (client.innerApiCalls.streamingAnnotateVideo as SinonStub)
           .getCall(0)
-          .calledWithExactly(undefined)
+          .calledWith(null)
       );
       assert.deepStrictEqual(
         ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
@@ -238,7 +238,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
       assert(
         (client.innerApiCalls.streamingAnnotateVideo as SinonStub)
           .getCall(0)
-          .calledWithExactly(undefined)
+          .calledWith(null)
       );
       assert.deepStrictEqual(
         ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
