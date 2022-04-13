@@ -13,4 +13,4 @@
 # limitations under the License.
 
 export GCLOUD_PROJECT=long-door-651
-export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/video-intelligence-service-account.json
+export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
