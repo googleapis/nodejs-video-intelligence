@@ -40,4 +40,5 @@ do
   else
     msg "Error retrieving secret ${key}"
   fi
+ls ${KOKORO_GFILE_DIR}/secret_manager
 done
