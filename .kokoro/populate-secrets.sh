@@ -33,8 +33,8 @@ do
     gcr.io/google.com/cloudsdktool/cloud-sdk \
     secrets versions access latest \
     --project cloud-devrel-kokoro-resources \
-    --secret ${key} > \
-    "${SECRET_LOCATION}/${key}"
+    --secret $key > \
+    "$SECRET_LOCATION/$key"
   if [[ $? == 0 ]]; then
     msg "Secret written to ${SECRET_LOCATION}/${key}"
   else
