@@ -12,4 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
+export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/video-intelligence-key.json
