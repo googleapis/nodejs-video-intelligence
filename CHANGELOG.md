@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-video-intelligence/compare/v3.4.1...v4.0.0) (2022-05-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* field ObjectTrackingAnnotation.segment moved into oneof, added track_id (#704)
+
+### Features
+
+* field ObjectTrackingAnnotation.segment moved into oneof, added track_id ([#704](https://github.com/googleapis/nodejs-video-intelligence/issues/704)) ([b55757b](https://github.com/googleapis/nodejs-video-intelligence/commit/b55757bedbc2563f2304a6596c50104b499f73d5))
+
 ### [3.4.1](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.4.0...v3.4.1) (2021-09-15)
 
 
