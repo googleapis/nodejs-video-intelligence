@@ -25,7 +25,7 @@ const file = 'resources/googlework_short.mp4';
 
 describe('streaming object', () => {
   it('should track an object in a streaming video', async () => {
-    const output = execSync(`${cmd} ${file}`);
+    const output = await execSync(`${cmd} ${file}`);
     assert.match(output, /cat/);
     assert.match(output, /Confidence: \d+\.\d+/);
   });
