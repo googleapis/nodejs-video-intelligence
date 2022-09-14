@@ -25,6 +25,21 @@ import * as videointelligenceserviceModule from '../src';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -208,7 +223,6 @@ describe('v1p2beta1.VideoIntelligenceServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1p2beta1.AnnotateVideoRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -217,11 +231,6 @@ describe('v1p2beta1.VideoIntelligenceServiceClient', () => {
       const [operation] = await client.annotateVideo(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.annotateVideo as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes annotateVideo without error using callback', async () => {
@@ -236,7 +245,6 @@ describe('v1p2beta1.VideoIntelligenceServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1p2beta1.AnnotateVideoRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -266,11 +274,6 @@ describe('v1p2beta1.VideoIntelligenceServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.annotateVideo as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes annotateVideo with call error', async () => {
@@ -285,18 +288,12 @@ describe('v1p2beta1.VideoIntelligenceServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1p2beta1.AnnotateVideoRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.annotateVideo = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.annotateVideo(request), expectedError);
-      assert(
-        (client.innerApiCalls.annotateVideo as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes annotateVideo with LRO error', async () => {
@@ -311,7 +308,6 @@ describe('v1p2beta1.VideoIntelligenceServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1p2beta1.AnnotateVideoRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.annotateVideo = stubLongRunningCall(
         undefined,
@@ -320,11 +316,6 @@ describe('v1p2beta1.VideoIntelligenceServiceClient', () => {
       );
       const [operation] = await client.annotateVideo(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.annotateVideo as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes checkAnnotateVideoProgress without error', async () => {
