@@ -1,3 +1,4 @@
+'**_THIS REPOSITORY IS DEPRECATED. ALL OF ITS CONTENT AND HISTORY HAS BEEN MOVED TO [GOOGLE-CLOUD-NODE](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-videointelligence)_**'
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
@@ -91,11 +92,11 @@ labels.forEach(label => {
   label.segments.forEach(segment => {
     segment = segment.segment;
     console.log(
-      `\tStart: ${segment.startTimeOffset.seconds}` +
+      `	Start: ${segment.startTimeOffset.seconds}` +
         `.${(segment.startTimeOffset.nanos / 1e6).toFixed(0)}s`
     );
     console.log(
-      `\tEnd: ${segment.endTimeOffset.seconds}.` +
+      `	End: ${segment.endTimeOffset.seconds}.` +
         `${(segment.endTimeOffset.nanos / 1e6).toFixed(0)}s`
     );
   });
